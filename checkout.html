@@ -326,6 +326,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .sd-saved-name{font-weight:700;color:#242844;margin:0 0 2px;font-size:15px;}
   .sd-saved-lines{color:#5b5648;margin:0;font-size:14px;line-height:1.5;}
   .sd-step.sd-attn{box-shadow:0 0 0 2px #FB5541;}
+  .sd-btn.is-disabled{opacity:.45;cursor:not-allowed;}
+  .sd-place-hint{font-size:12px;color:#8a8577;text-align:center;margin-top:8px;}
   /* cart cross-sell + free shipping */
   .sd-ship-free{display:flex;align-items:center;gap:8px;background:#eaf5ea;color:#2f7a5a;font-weight:700;font-size:13px;border-radius:10px;padding:10px 14px;margin:0 0 16px;}
   .sd-cart-xsell{margin:22px 0 0;border:1px solid #e7ddc9;border-radius:14px;background:#faf7f0;padding:18px 20px;}
@@ -684,14 +686,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="sd-step" id="sd-ship-step" hidden>
       <h2><span class="sd-step-num">2</span>Shipping address</h2>
       <div class="sd-grid2" style="margin-top:14px;">
-        <div class="sd-field"><label>First name</label><input></div>
-        <div class="sd-field"><label>Last name</label><input></div>
+        <div class="sd-field"><label>First name</label><input data-req></div>
+        <div class="sd-field"><label>Last name</label><input data-req></div>
       </div>
       <div class="sd-field"><label>Program / school (optional)</label><input></div>
-      <div class="sd-field"><label>Address</label><input></div>
+      <div class="sd-field"><label>Address</label><input data-req></div>
       <div class="sd-grid2">
-        <div class="sd-field"><label>City</label><input></div>
-        <div class="sd-field"><label>ZIP</label><input></div>
+        <div class="sd-field"><label>City</label><input data-req></div>
+        <div class="sd-field"><label>ZIP</label><input data-req></div>
       </div>
     </div>
     <div class="sd-step" id="sd-pay-step" hidden>
@@ -704,10 +706,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
       </div>
       <div id="sd-pay-form">
-        <div class="sd-field" style="margin-top:14px;"><label>Card number</label><input placeholder="1234 5678 9012 3456"></div>
+        <div class="sd-field" style="margin-top:14px;"><label>Card number</label><input placeholder="1234 5678 9012 3456" data-req></div>
         <div class="sd-grid2">
-          <div class="sd-field"><label>Expiry</label><input placeholder="MM / YY"></div>
-          <div class="sd-field"><label>CVC</label><input placeholder="123"></div>
+          <div class="sd-field"><label>Expiry</label><input placeholder="MM / YY" data-req></div>
+          <div class="sd-field"><label>CVC</label><input placeholder="123" data-req></div>
         </div>
       </div>
     </div>
@@ -726,6 +728,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="sd-summary-total"><span>Due today</span><span id="sd-co-total">$0</span></div>
     <div class="sd-firstmonth" id="sd-co-note"></div>
     <button class="sd-btn" id="sd-co-place" style="margin-top:18px;">Place order</button>
+    <div class="sd-place-hint" id="sd-place-hint"></div>
     <div class="sd-trust-row"><span>🔒 Secure checkout</span><span>✓ Cancel anytime</span><span>✓ No commitment</span></div>
     <a class="sd-link" href="cart.html">← Back to cart</a>
   </aside>
@@ -804,6 +807,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   // account exists. Sign in is the happy path: a returning shopper has their
   // address + card on file, so we skip Shipping and show the card on file (not a
   // blank form). Create-account collects both (Account -> Shipping -> Payment).
+  function fieldsFilled(el){ var r=el.querySelectorAll('[data-req]'); for(var i=0;i<r.length;i++){ if(!r[i].value.trim()) return false; } return true; }
+  // Place order is gated: disabled until there's an account and (for new customers)
+  // the shipping + payment details are entered. Sign-in shoppers have both on file.
+  function updatePlace(){
+    var btn=document.getElementById('sd-co-place'), hint=document.getElementById('sd-place-hint');
+    var u=currentUser(), ok=false, msg='';
+    if(!u){ msg='Sign in or create an account to continue.'; }
+    else if(u.newAccount && !(fieldsFilled(document.getElementById('sd-ship-step')) && fieldsFilled(document.getElementById('sd-pay-form')))){ msg='Add your shipping and payment details to continue.'; }
+    else { ok=true; }
+    btn.disabled=!ok; btn.classList.toggle('is-disabled', !ok); hint.textContent=ok?'':msg;
+  }
   function renderSteps(){
     var u=currentUser();
     var showShip=!!(u && u.newAccount);
@@ -813,8 +827,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     document.getElementById('sd-pay-saved').hidden=(payMode!=='saved');
     document.getElementById('sd-pay-form').hidden=(payMode!=='form');
     document.getElementById('sd-pay-num').textContent = showShip ? '3' : '2';
+    updatePlace();
   }
-  document.getElementById('sd-pay-change').onclick=function(){ document.getElementById('sd-pay-saved').hidden=true; document.getElementById('sd-pay-form').hidden=false; };
+  document.getElementById('sd-pay-change').onclick=function(){ document.getElementById('sd-pay-saved').hidden=true; document.getElementById('sd-pay-form').hidden=false; updatePlace(); };
+  document.getElementById('sd-ship-step').addEventListener('input', updatePlace);
+  document.getElementById('sd-pay-step').addEventListener('input', updatePlace);
   function renderAcct(){ var u=currentUser(); if(u){ acctIn.hidden=false; acctForms.hidden=true; acctEmail.textContent=(u.email||u.name||'you'); } else { acctIn.hidden=true; acctForms.hidden=false; } renderSteps(); }
   function setUser(u){ localStorage.setItem('sd_user', JSON.stringify(u)); if(window.sdRefreshHeader) window.sdRefreshHeader(); renderAcct(); }
   Array.prototype.forEach.call(document.querySelectorAll('.sd-tab'), function(t){ t.onclick=function(){
@@ -828,10 +845,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   document.getElementById('sd-cr-btn').onclick=function(){ var f=(document.getElementById('sd-cr-first').value||'there').trim(); var em=(document.getElementById('sd-cr-email').value||'').trim(); sdTrack('sign_up'); setUser({name:f, email:em, newAccount:true}); };
   document.getElementById('sd-acct-out-btn').onclick=function(){ localStorage.removeItem('sd_user'); if(window.sdRefreshHeader) window.sdRefreshHeader(); renderAcct(); };
   renderAcct();
-  document.getElementById('sd-co-place').onclick=function(){
-    if(!currentUser()){ var s=document.getElementById('sd-acct-step'); s.classList.add('sd-attn'); s.scrollIntoView({behavior:'smooth',block:'center'}); setTimeout(function(){s.classList.remove('sd-attn');},1800); return; }
-    showSuccess('card');
-  };
+  document.getElementById('sd-co-place').onclick=function(){ if(this.disabled) return; showSuccess('card'); };
   var input=document.getElementById('sd-co-promo-input'), msg=document.getElementById('sd-co-promo-msg');
   document.getElementById('sd-co-promo-apply').onclick=function(){
     if(input.value.trim().toUpperCase()==='SAVE50'){applied=true;msg.textContent='✓ SAVE50 applied — $50 off today';msg.className='sd-promo-msg ok';}
