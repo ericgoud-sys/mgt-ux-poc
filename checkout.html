@@ -353,10 +353,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .sd-pay-success .chk{font-size:46px;line-height:1;color:#2f9e9e;}
   .sd-pay-success h3{margin:10px 0 4px;color:#111;font-size:20px;}
   .sd-pay-success p{color:#555;font-size:14px;margin:0;}
+  /* focused checkout: minimal header (logo + secure cue), no nav / promo bar */
+  .sd-focus-header{border-bottom:1px solid #ece7dc;background:#fff;}
+  .sd-focus-header__inner{max-width:1180px;margin:0 auto;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;}
+  .sd-focus-logo img{height:38px;width:auto;display:block;}
+  .sd-focus-secure{font-size:13px;font-weight:700;color:#4d7a5f;white-space:nowrap;display:flex;align-items:center;gap:6px;}
   @media (max-width:800px){
     .sd-cart,.sd-checkout{grid-template-columns:1fr;}
     .sd-auth{grid-template-columns:1fr;}
     .sd-summary{position:static;}
+    .sd-focus-header__inner{padding:12px 16px;}
+    .sd-focus-logo img{height:32px;}
   }
 </style>
 </head>
@@ -374,204 +381,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </a>
 
 
-<div class="announcement-bar">
-    <div class="announcement-bar__inner">
-        <strong>
-            Save $50 on your first month of curriculum!*
-        </strong>
-
-        <span>
-            Use code <strong>SAVE50</strong> at checkout
-        </span>
-
-        <small>
-            *Terms and conditions apply
-        </small>
-    </div>
-</div>
-
-<header class="header header--single-row" role="banner">
-
-    <div class="header-inner">
-
-        <a
-            href="#"
-            class="mobileMenu-toggle"
-            data-mobile-menu-toggle="menu"
-            aria-label="Toggle menu"
-        >
-            <span class="mobileMenu-toggleIcon">
-                Toggle menu
-            </span>
-        </a>
-
-            <div class="header-logo header-logo--center">
-                <a href="index.html" class="header-logo__link" data-header-logo-link>
-        <div class="header-logo-image-container">
-            <img class="header-logo-image"
-                 src="assets/images/stencil/250x100/ec_logo_size_fix_1778004670__99733.original.png"
-                 srcset="assets/images/stencil/250x100/ec_logo_size_fix_1778004670__99733.original.png"
-                 alt="Experience Early Learning"
-                 title="Experience Early Learning">
-        </div>
-</a>
-            </div>
-
-        <div class="header-right">
-
-            <div
-                class="navPages-container"
-                id="menu"
-                data-menu
-            >
-                <nav class="navPages">
-    <!--<div class="navPages-quickSearch">
-        <div class="container">
-    <form class="form" data-url="https://store.mybrightwheel.com/search.php" data-quick-search-form>
-        <fieldset class="form-fieldset">
-            <div class="form-field">
-                <label class="is-srOnly" for="nav-menu-quick-search">Search</label>
-                <input class="form-input"
-                       data-search-quick
-                       name="nav-menu-quick-search"
-                       id="nav-menu-quick-search"
-                       data-error-message="Search field cannot be empty."
-                       placeholder="Search the store"
-                       autocomplete="off"
-                >
-            </div>
-        </fieldset>
-    </form>
-    <section class="quickSearchResults" data-bind="html: results"></section>
-    <p role="status"
-       aria-live="polite"
-       class="aria-description--hidden"
-       data-search-aria-message-predefined-text="product results for"
-    ></p>
-</div>
-    </div>-->
-    <ul class="navPages-list">
-            <li class="navPages-item">
-                <a class="navPages-action"
-   href="https://store.mybrightwheel.com/all-products/"
-   aria-label="All products"
->
-    All products
-</a>
-            </li>
-                 <li class="navPages-item navPages-item-page">
-                     <a class="navPages-action"
-                        href="baby.html"
-                        aria-label="Baby"
-                     >
-                         Baby
-                     </a>
-                 </li>
-                 <li class="navPages-item navPages-item-page">
-                     <a class="navPages-action"
-                        href="toddler.html"
-                        aria-label="Toddler"
-                     >
-                         Toddler
-                     </a>
-                 </li>
-                 <li class="navPages-item navPages-item-page">
-                     <a class="navPages-action"
-                        href="preschool.html"
-                        aria-label="Preschool"
-                     >
-                         Preschool
-                     </a>
-                 </li>
-                 <li class="navPages-item navPages-item-page">
-                     <a class="navPages-action"
-                        href="multi-age.html"
-                        aria-label="Multi-Age"
-                     >
-                         Multi-Age
-                     </a>
-                 </li>
-                 <li class="navPages-item navPages-item-page">
-                     <a class="navPages-action activePage"
-                        href="enhancements.html"
-                        aria-label="Enhancement Programs"
-                     >
-                         Enhancement Programs
-                     </a>
-                 </li>
-                 <li class="navPages-item navPages-item-page">
-                     <a class="navPages-action"
-                        href="https://store.mybrightwheel.com/faqs/"
-                        aria-label="FAQs"
-                     >
-                         FAQs
-                     </a>
-                 </li>
-    </ul>
-    <ul class="navPages-list navPages-list--user">
-            <li class="navPages-item">
-                <a class="navPages-action"
-                   href="signin.html"
-                   aria-label="Sign in"
-                >
-                    Sign in
-                </a>
-                    or
-                    <a class="navPages-action"
-                       href="signin.html"
-                       aria-label="Register"
-                    >
-                        Register
-                    </a>
-            </li>
-    </ul>
-</nav>
-            </div>
-
-            <div class="header-actions">
-
-                    <a
-                        class="header-signIn"
-                        href="signin.html"
-                    >
-                        Sign in
-                    </a>
-
-                <a
-                    class="header-cart"
-                    href="cart.html"
-                    aria-label="View cart"
-                >
-                    <img
-                        class="header-cart__icon header-cart__icon--empty"
-                        src="content/cart-empty.svg"
-                        alt=""
-                        aria-hidden="true"
-                    >
-
-                    <img
-                        class="header-cart__icon header-cart__icon--full"
-                        src="content/cart-full.svg"
-                        alt=""
-                        aria-hidden="true"
-                        hidden
-                    >
-
-                    <span
-                        class="header-cart__count"
-                        data-header-cart-count
-                        hidden
-                    ></span>
-                </a>
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <div data-content-region="header_navigation_bottom--global"></div>
-
+<header class="sd-focus-header" role="banner">
+  <div class="sd-focus-header__inner">
+    <a href="index.html" class="sd-focus-logo" aria-label="Experience Early Learning — home">
+      <img src="assets/images/stencil/250x100/ec_logo_size_fix_1778004670__99733.original.png" alt="Experience Early Learning">
+    </a>
+    <span class="sd-focus-secure">🔒 Secure checkout</span>
+  </div>
 </header>
 
 <div data-content-region="header_bottom--global"></div>
