@@ -319,12 +319,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .sd-acct-badge{background:#eaf5ea;color:#2f7a5a;font-weight:700;font-size:14px;border-radius:10px;padding:12px 14px;}
   .sd-acct-badge strong{color:#236c48;}
   .sd-linkbtn{background:none;border:0;color:#6b6558;text-decoration:underline;font-size:13px;cursor:pointer;padding:8px 0 0;}
-  .sd-saved-addr{border:1px solid #eee3cf;background:#fbf7ee;border-radius:12px;padding:14px 16px;margin-top:14px;}
-  .sd-saved-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:8px;}
-  .sd-saved-tag{font-size:11px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#2f7a5a;background:#eaf5ea;border-radius:999px;padding:3px 9px;}
-  .sd-saved-head .sd-linkbtn{padding:0;}
-  .sd-saved-name{font-weight:700;color:#242844;margin:0 0 2px;font-size:15px;}
-  .sd-saved-lines{color:#5b5648;margin:0;font-size:14px;line-height:1.5;}
   .sd-step.sd-attn{box-shadow:0 0 0 2px #FB5541;}
   /* cart cross-sell + free shipping */
   .sd-ship-free{display:flex;align-items:center;gap:8px;background:#eaf5ea;color:#2f7a5a;font-weight:700;font-size:13px;border-radius:10px;padding:10px 14px;margin:0 0 16px;}
@@ -681,30 +675,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
       </div>
     </div>
-    <div class="sd-step">
+    <div class="sd-step" id="sd-ship-step" hidden>
       <h2><span class="sd-step-num">2</span>Shipping address</h2>
-      <div id="sd-ship-saved" hidden>
-        <div class="sd-saved-addr">
-          <div class="sd-saved-head"><span class="sd-saved-tag">On file</span><button class="sd-linkbtn" id="sd-ship-change" type="button">Use a different address</button></div>
-          <p class="sd-saved-name" id="sd-saved-name"></p>
-          <p class="sd-saved-lines" id="sd-saved-lines"></p>
-        </div>
+      <div class="sd-grid2" style="margin-top:14px;">
+        <div class="sd-field"><label>First name</label><input></div>
+        <div class="sd-field"><label>Last name</label><input></div>
       </div>
-      <div id="sd-ship-form">
-        <div class="sd-grid2" style="margin-top:14px;">
-          <div class="sd-field"><label>First name</label><input></div>
-          <div class="sd-field"><label>Last name</label><input></div>
-        </div>
-        <div class="sd-field"><label>Program / school (optional)</label><input></div>
-        <div class="sd-field"><label>Address</label><input></div>
-        <div class="sd-grid2">
-          <div class="sd-field"><label>City</label><input></div>
-          <div class="sd-field"><label>ZIP</label><input></div>
-        </div>
+      <div class="sd-field"><label>Program / school (optional)</label><input></div>
+      <div class="sd-field"><label>Address</label><input></div>
+      <div class="sd-grid2">
+        <div class="sd-field"><label>City</label><input></div>
+        <div class="sd-field"><label>ZIP</label><input></div>
       </div>
     </div>
     <div class="sd-step">
-      <h2><span class="sd-step-num">3</span>Payment</h2>
+      <h2><span class="sd-step-num" id="sd-pay-num">3</span>Payment</h2>
       <div class="sd-field" style="margin-top:14px;"><label>Card number</label><input placeholder="1234 5678 9012 3456"></div>
       <div class="sd-grid2">
         <div class="sd-field"><label>Expiry</label><input placeholder="MM / YY"></div>
@@ -800,26 +785,28 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   // account step (required): sign in or create an account
   function currentUser(){ try{return JSON.parse(localStorage.getItem('sd_user')||'null');}catch(e){return null;} }
   var acctIn=document.getElementById('sd-acct-in'), acctForms=document.getElementById('sd-acct-forms'), acctEmail=document.getElementById('sd-acct-email');
-  // A returning shopper who signs in already has a shipping address on file, so we
-  // show it (collapsed) instead of an empty form. The blank form is only for new
-  // accounts (nothing on file yet) or "use a different address".
-  var DEFAULT_ADDR={name:'Jordan Rivera',program:'Sunrise Learning Center',line:'742 Evergreen Terrace',city:'Minneapolis',state:'MN',zip:'55416'};
-  function renderShipping(){
-    var u=currentUser(), saved=document.getElementById('sd-ship-saved'), form=document.getElementById('sd-ship-form');
-    if(u && !u.newAccount){ var a=u.address||DEFAULT_ADDR;
-      document.getElementById('sd-saved-name').textContent=a.name+(a.program?(' · '+a.program):'');
-      document.getElementById('sd-saved-lines').textContent=a.line+', '+a.city+', '+a.state+' '+a.zip;
-      saved.hidden=false; form.hidden=true;
-    } else { saved.hidden=true; form.hidden=false; }
+  // Shipping address is only collected on the create-account path. Sign in is the
+  // happy path — returning shoppers already have an address on file — so that step
+  // is hidden for them and Payment becomes step 2.
+  function shippingNeeded(){
+    var u=currentUser();
+    if(u) return !!u.newAccount;
+    var ct=document.querySelector('.sd-tab[data-tab="create"]');
+    return !!(ct && ct.classList.contains('is-active'));
   }
-  document.getElementById('sd-ship-change').onclick=function(){ document.getElementById('sd-ship-saved').hidden=true; document.getElementById('sd-ship-form').hidden=false; };
-  function renderAcct(){ var u=currentUser(); if(u){ acctIn.hidden=false; acctForms.hidden=true; acctEmail.textContent=(u.email||u.name||'you'); } else { acctIn.hidden=true; acctForms.hidden=false; } renderShipping(); }
+  function renderSteps(){
+    var show=shippingNeeded();
+    document.getElementById('sd-ship-step').hidden=!show;
+    document.getElementById('sd-pay-num').textContent = show ? '3' : '2';
+  }
+  function renderAcct(){ var u=currentUser(); if(u){ acctIn.hidden=false; acctForms.hidden=true; acctEmail.textContent=(u.email||u.name||'you'); } else { acctIn.hidden=true; acctForms.hidden=false; } renderSteps(); }
   function setUser(u){ localStorage.setItem('sd_user', JSON.stringify(u)); if(window.sdRefreshHeader) window.sdRefreshHeader(); renderAcct(); }
   Array.prototype.forEach.call(document.querySelectorAll('.sd-tab'), function(t){ t.onclick=function(){
     Array.prototype.forEach.call(document.querySelectorAll('.sd-tab'), function(x){x.classList.remove('is-active');}); t.classList.add('is-active');
     var tab=t.getAttribute('data-tab');
     document.querySelector('[data-pane="signin"]').hidden=(tab!=='signin');
     document.querySelector('[data-pane="create"]').hidden=(tab!=='create');
+    renderSteps();
   };});
   document.getElementById('sd-in-btn').onclick=function(){ var em=(document.getElementById('sd-in-email').value||'you@school.org').trim(); sdTrack('login'); setUser({email:em, name:em.split('@')[0]}); };
   document.getElementById('sd-cr-btn').onclick=function(){ var f=(document.getElementById('sd-cr-first').value||'there').trim(); var em=(document.getElementById('sd-cr-email').value||'').trim(); sdTrack('sign_up'); setUser({name:f, email:em, newAccount:true}); };
