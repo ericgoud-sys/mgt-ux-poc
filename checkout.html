@@ -319,6 +319,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .sd-acct-badge{background:#eaf5ea;color:#2f7a5a;font-weight:700;font-size:14px;border-radius:10px;padding:12px 14px;}
   .sd-acct-badge strong{color:#236c48;}
   .sd-linkbtn{background:none;border:0;color:#6b6558;text-decoration:underline;font-size:13px;cursor:pointer;padding:8px 0 0;}
+  .sd-saved-addr{border:1px solid #eee3cf;background:#fbf7ee;border-radius:12px;padding:14px 16px;margin-top:14px;}
+  .sd-saved-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:8px;}
+  .sd-saved-tag{font-size:11px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#2f7a5a;background:#eaf5ea;border-radius:999px;padding:3px 9px;}
+  .sd-saved-head .sd-linkbtn{padding:0;}
+  .sd-saved-name{font-weight:700;color:#242844;margin:0 0 2px;font-size:15px;}
+  .sd-saved-lines{color:#5b5648;margin:0;font-size:14px;line-height:1.5;}
   .sd-step.sd-attn{box-shadow:0 0 0 2px #FB5541;}
   /* cart cross-sell + free shipping */
   .sd-ship-free{display:flex;align-items:center;gap:8px;background:#eaf5ea;color:#2f7a5a;font-weight:700;font-size:13px;border-radius:10px;padding:10px 14px;margin:0 0 16px;}
@@ -688,12 +694,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="sd-field"><label>ZIP</label><input></div>
       </div>
     </div>
-    <div class="sd-step">
-      <h2><span class="sd-step-num" id="sd-pay-num">3</span>Payment</h2>
-      <div class="sd-field" style="margin-top:14px;"><label>Card number</label><input placeholder="1234 5678 9012 3456"></div>
-      <div class="sd-grid2">
-        <div class="sd-field"><label>Expiry</label><input placeholder="MM / YY"></div>
-        <div class="sd-field"><label>CVC</label><input placeholder="123"></div>
+    <div class="sd-step" id="sd-pay-step" hidden>
+      <h2><span class="sd-step-num" id="sd-pay-num">2</span>Payment</h2>
+      <div id="sd-pay-saved" hidden>
+        <div class="sd-saved-addr">
+          <div class="sd-saved-head"><span class="sd-saved-tag">On file</span><button class="sd-linkbtn" id="sd-pay-change" type="button">Use a different card</button></div>
+          <p class="sd-saved-name">💳 Visa ending in 4242</p>
+          <p class="sd-saved-lines">Expires 08/28</p>
+        </div>
+      </div>
+      <div id="sd-pay-form">
+        <div class="sd-field" style="margin-top:14px;"><label>Card number</label><input placeholder="1234 5678 9012 3456"></div>
+        <div class="sd-grid2">
+          <div class="sd-field"><label>Expiry</label><input placeholder="MM / YY"></div>
+          <div class="sd-field"><label>CVC</label><input placeholder="123"></div>
+        </div>
       </div>
     </div>
   </div>
@@ -785,20 +800,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   // account step (required): sign in or create an account
   function currentUser(){ try{return JSON.parse(localStorage.getItem('sd_user')||'null');}catch(e){return null;} }
   var acctIn=document.getElementById('sd-acct-in'), acctForms=document.getElementById('sd-acct-forms'), acctEmail=document.getElementById('sd-acct-email');
-  // Shipping address is only collected on the create-account path. Sign in is the
-  // happy path — returning shoppers already have an address on file — so that step
-  // is hidden for them and Payment becomes step 2.
-  function shippingNeeded(){
-    var u=currentUser();
-    if(u) return !!u.newAccount;
-    var ct=document.querySelector('.sd-tab[data-tab="create"]');
-    return !!(ct && ct.classList.contains('is-active'));
-  }
+  // The account step is required first, so Shipping + Payment stay hidden until an
+  // account exists. Sign in is the happy path: a returning shopper has their
+  // address + card on file, so we skip Shipping and show the card on file (not a
+  // blank form). Create-account collects both (Account -> Shipping -> Payment).
   function renderSteps(){
-    var show=shippingNeeded();
-    document.getElementById('sd-ship-step').hidden=!show;
-    document.getElementById('sd-pay-num').textContent = show ? '3' : '2';
+    var u=currentUser();
+    var showShip=!!(u && u.newAccount);
+    var payMode = !u ? 'hidden' : (u.newAccount ? 'form' : 'saved');
+    document.getElementById('sd-ship-step').hidden=!showShip;
+    document.getElementById('sd-pay-step').hidden=(payMode==='hidden');
+    document.getElementById('sd-pay-saved').hidden=(payMode!=='saved');
+    document.getElementById('sd-pay-form').hidden=(payMode!=='form');
+    document.getElementById('sd-pay-num').textContent = showShip ? '3' : '2';
   }
+  document.getElementById('sd-pay-change').onclick=function(){ document.getElementById('sd-pay-saved').hidden=true; document.getElementById('sd-pay-form').hidden=false; };
   function renderAcct(){ var u=currentUser(); if(u){ acctIn.hidden=false; acctForms.hidden=true; acctEmail.textContent=(u.email||u.name||'you'); } else { acctIn.hidden=true; acctForms.hidden=false; } renderSteps(); }
   function setUser(u){ localStorage.setItem('sd_user', JSON.stringify(u)); if(window.sdRefreshHeader) window.sdRefreshHeader(); renderAcct(); }
   Array.prototype.forEach.call(document.querySelectorAll('.sd-tab'), function(t){ t.onclick=function(){
