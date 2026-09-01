@@ -545,14 +545,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 >
                     <img
                         class="header-cart__icon header-cart__icon--empty"
-                        src="content/cart-empty.svg"
+                        src="/content/cart-empty.svg"
                         alt=""
                         aria-hidden="true"
                     >
 
                     <img
                         class="header-cart__icon header-cart__icon--full"
-                        src="content/cart-full.svg"
+                        src="/content/cart-full.svg"
                         alt=""
                         aria-hidden="true"
                         hidden
@@ -1132,7 +1132,11 @@ class="lazyload"
     var c=[]; try{c=JSON.parse(localStorage.getItem('sd_cart')||'[]');}catch(e){}
     var merged=false;
     for(var i=0;i<c.length;i++){ if(c[i].item===titleTxt && c[i].price===curPrice && c[i].month==='September 2026'){ c[i].qty=(c[i].qty||1)+curQty; merged=true; break; } }
-    if(!merged) c.push({item:titleTxt, price:curPrice, qty:curQty, month:'September 2026', img:heroImg});
+    if(!merged){
+      var entry={item:titleTxt, price:curPrice, qty:curQty, month:'September 2026', img:heroImg, mode:CFG.mode};
+      if(CFG.mode==='tiers'){ var ss=root.querySelector('[data-sd-size]'); entry.sizes=CFG.sizes; entry.sizeIdx=ss?parseInt(ss.value,10):0; }
+      c.push(entry);
+    }
     localStorage.setItem('sd_cart', JSON.stringify(c));
     if(window.sdTrack) sdTrack('add_to_cart', {item:titleTxt, price:curPrice});
     if(window.sdUpdateCartBadge) sdUpdateCartBadge();

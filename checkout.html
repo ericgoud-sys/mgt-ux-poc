@@ -538,14 +538,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 >
                     <img
                         class="header-cart__icon header-cart__icon--empty"
-                        src="content/cart-empty.svg"
+                        src="/content/cart-empty.svg"
                         alt=""
                         aria-hidden="true"
                     >
 
                     <img
                         class="header-cart__icon header-cart__icon--full"
-                        src="content/cart-full.svg"
+                        src="/content/cart-full.svg"
                         alt=""
                         aria-hidden="true"
                         hidden
@@ -727,23 +727,26 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   function load(){ try{return JSON.parse(localStorage.getItem('sd_cart')||'[]');}catch(e){return [];} }
   function save(c){ localStorage.setItem('sd_cart', JSON.stringify(c)); }
   var q=new URLSearchParams(location.search);
-  if((q.get('promo')||'').toUpperCase()==='SAVE50') localStorage.setItem('sd_promo','SAVE50');
   if(q.get('item') && !load().length){ save([{item:q.get('item'),price:parseFloat(q.get('price')||'147'),qty:parseInt(q.get('qty')||'1',10),month:q.get('month')||MONTHS[0],img:''}]); }
-  var applied=(localStorage.getItem('sd_promo')||'')==='SAVE50';
+  var applied=false;
   var itemsEl=document.getElementById('sd-co-items');
   function money(n){return '$'+n.toFixed(2);}
   function qtyOpts(sel){var s='';for(var i=1;i<=10;i++){s+='<option value="'+i+'"'+(i===sel?' selected':'')+'>'+i+'</option>';}return s;}
   function monOpts(sel){var s='';MONTHS.forEach(function(m){s+='<option value="'+m+'"'+(m===sel?' selected':'')+'>'+m+'</option>';});return s;}
+  function sizeOpts(it){var s='';(it.sizes||[]).forEach(function(sz,i){s+='<option value="'+i+'"'+(i===(it.sizeIdx||0)?' selected':'')+'>'+sz.code+' ('+sz.range+') — $'+sz.price+'/mo</option>';});return s;}
+  function sizeLabel(it){if(it.sizes&&it.sizes[it.sizeIdx||0]){return 'Size '+it.sizes[it.sizeIdx||0].code+' · ';}return '';}
   function render(){
     var c=load(); itemsEl.innerHTML='';
     c.forEach(function(it,idx){
       var qn=it.qty||1, wrap=document.createElement('div'); wrap.style.marginBottom='14px';
       wrap.innerHTML='<div class="sd-summary-line" style="font-weight:700;color:#242844;"><span>'+it.item+(qn>1?' × '+qn:'')+'</span><span>$'+((it.price||0)*qn).toFixed(0)+'/mo</span></div>'+
-        '<div class="sd-line-summary" data-view style="margin:2px 0 0;"><span style="font-size:12px;">Starts '+it.month+'</span><button class="sd-edit-btn" data-edit type="button">Edit</button></div>'+
-        '<div class="sd-line-editor" data-editor hidden><div class="sd-ed-field"><label>Quantity</label><select data-qty>'+qtyOpts(qn)+'</select></div>'+
-        '<div class="sd-ed-field"><label>Start month</label><select data-month>'+monOpts(it.month)+'</select></div><button class="sd-done-btn" data-done type="button">Done</button></div>';
+        '<div class="sd-line-summary" data-view style="margin:2px 0 0;"><span style="font-size:12px;">'+sizeLabel(it)+'Starts '+it.month+'</span><button class="sd-edit-btn" data-edit type="button">Edit</button></div>'+
+        '<div class="sd-line-editor" data-editor hidden>'+
+          (it.sizes?'<div class="sd-ed-field"><label>Class size</label><select data-size>'+sizeOpts(it)+'</select></div>':'')+
+          '<div class="sd-ed-field"><label>Quantity</label><select data-qty>'+qtyOpts(qn)+'</select></div>'+
+          '<div class="sd-ed-field"><label>Start month</label><select data-month>'+monOpts(it.month)+'</select></div><button class="sd-done-btn" data-done type="button">Done</button></div>';
       wrap.querySelector('[data-edit]').onclick=function(){wrap.querySelector('[data-view]').hidden=true;wrap.querySelector('[data-editor]').hidden=false;};
-      wrap.querySelector('[data-done]').onclick=function(){var cc=load();cc[idx].qty=parseInt(wrap.querySelector('[data-qty]').value,10);cc[idx].month=wrap.querySelector('[data-month]').value;save(cc);render();};
+      wrap.querySelector('[data-done]').onclick=function(){var cc=load();var szSel=wrap.querySelector('[data-size]');if(szSel){cc[idx].sizeIdx=parseInt(szSel.value,10);cc[idx].price=cc[idx].sizes[cc[idx].sizeIdx].price;}cc[idx].qty=parseInt(wrap.querySelector('[data-qty]').value,10);cc[idx].month=wrap.querySelector('[data-month]').value;save(cc);render();};
       itemsEl.appendChild(wrap);
     });
     var sub=c.reduce(function(a,it){return a+(it.price||0)*(it.qty||1);},0);
@@ -801,11 +804,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   };
   var input=document.getElementById('sd-co-promo-input'), msg=document.getElementById('sd-co-promo-msg');
   document.getElementById('sd-co-promo-apply').onclick=function(){
-    if(input.value.trim().toUpperCase()==='SAVE50'){applied=true;localStorage.setItem('sd_promo','SAVE50');msg.textContent='✓ SAVE50 applied — $50 off today';msg.className='sd-promo-msg ok';}
-    else{applied=false;localStorage.removeItem('sd_promo');msg.textContent=input.value?"That code isn't valid.":"Enter a promo code.";msg.className='sd-promo-msg err';}
+    if(input.value.trim().toUpperCase()==='SAVE50'){applied=true;msg.textContent='✓ SAVE50 applied — $50 off today';msg.className='sd-promo-msg ok';}
+    else{applied=false;msg.textContent=input.value?"That code isn't valid.":"Enter a promo code.";msg.className='sd-promo-msg err';}
     render();
   };
-  if(applied){input.value='SAVE50';msg.textContent='✓ SAVE50 applied — $50 off today';msg.className='sd-promo-msg ok';}
   render();
 })();
 </script>
