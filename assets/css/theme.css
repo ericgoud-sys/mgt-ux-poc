@@ -13,6 +13,11 @@ body{font-weight:500}
 .sd-enh-title{font-size:28px!important;line-height:1.25!important;margin:0 auto 28px!important;}
 /* multi-age page tint: swap the chartreuse for a soft sage green */
 .productView[data-entity-id="113"]{background-color:#ebf3df!important;}
+/* toddler gallery: 4:3 landscape frame so the new landscape imagery fills it
+   with no letterbox bars (desktop only; mobile uses natural height) */
+@media (min-width:801px){
+  .productView[data-entity-id="114"] .productView-img-container::after{padding-bottom:75%!important;}
+}
 /* mobile: let the hero image size to its natural height (single column, so no
    balance concern) — removes the tall letterboxed box that pushed content down */
 @media (max-width:800px){
