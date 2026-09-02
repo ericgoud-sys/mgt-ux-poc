@@ -46,25 +46,57 @@ body{font-weight:500}
    buttons. The white wrapper card is neutralised so the grey box + tiles stand
    on the page background. */
 .productView[data-entity-id="114"] .productView-images{background:transparent!important;padding:0!important;border:0!important;box-shadow:none!important;border-radius:0!important;}
-/* white matte/card around the image, matching the pricing card (border, radius, 28px padding) */
-.productView[data-entity-id="114"] .productView-image{background:#fff!important;border:1px solid #e7ddc9!important;border-radius:14px!important;padding:28px!important;box-shadow:none!important;}
+/* white matte/card around the image (24px margin) */
+.productView[data-entity-id="114"] .productView-image{background:#fff!important;border:1px solid #e7ddc9!important;border-radius:14px!important;padding:24px!important;box-shadow:none!important;}
 .productView[data-entity-id="114"] .productView-img-container{background:#eeece8!important;border-radius:10px!important;overflow:hidden!important;}
 /* remove the hover-zoom (easyzoom) on the main image */
 .productView[data-entity-id="114"] .easyzoom-flyout{display:none!important;}
 .productView[data-entity-id="114"] .productView-img-container a{cursor:default!important;pointer-events:none!important;}
-/* show all 7 thumbnails in one static, equal-width row — bypass the slick
-   carousel transform and hide its arrows (cleaner than paginating 7 items) */
-.productView[data-entity-id="114"] .productView-thumbnails{margin-top:18px!important;padding:0!important;position:relative;}
-.productView[data-entity-id="114"] .productView-thumbnails .slick-list{width:100%!important;overflow:visible!important;margin:0!important;padding:0!important;}
-.productView[data-entity-id="114"] .productView-thumbnails .slick-track{width:100%!important;transform:none!important;display:flex!important;justify-content:space-between!important;gap:12px!important;}
-.productView[data-entity-id="114"] .productView-thumbnails .slick-slide{width:auto!important;flex:1 1 0!important;float:none!important;height:auto!important;}
+/* thumbnail carousel: fixed portrait tiles (fit the full 4:5 image), 24px gaps,
+   native horizontal scroll driven by custom arrow controls on either side.
+   Slick's transform/arrows are neutralised so the scroll + our arrows own it. */
+.productView[data-entity-id="114"] .productView-thumbnails{margin-top:20px!important;padding:0 46px!important;position:relative!important;}
+.productView[data-entity-id="114"] .productView-thumbnails .slick-list{width:100%!important;overflow-x:auto!important;overflow-y:visible!important;scroll-behavior:smooth;margin:0!important;padding:4px 0!important;-ms-overflow-style:none;scrollbar-width:none;}
+.productView[data-entity-id="114"] .productView-thumbnails .slick-list::-webkit-scrollbar{display:none;}
+.productView[data-entity-id="114"] .productView-thumbnails .slick-track{width:auto!important;transform:none!important;display:flex!important;gap:24px!important;}
+.productView[data-entity-id="114"] .productView-thumbnails .slick-slide{width:auto!important;flex:0 0 auto!important;float:none!important;height:auto!important;}
 .productView[data-entity-id="114"] .productView-thumbnails .slick-cloned{display:none!important;}
 .productView[data-entity-id="114"] .slick-prev,.productView[data-entity-id="114"] .slick-next{display:none!important;}
 .productView[data-entity-id="114"] .productView-thumbnail{padding:0!important;margin:0!important;}
-.productView[data-entity-id="114"] .productView-thumbnail-link{display:block;background:#fff;border:1px solid #e6ddcd;border-radius:12px;padding:7px;overflow:hidden;box-shadow:0 1px 2px rgba(60,50,30,.05);transition:border-color .16s ease,box-shadow .16s ease;}
-.productView[data-entity-id="114"] .productView-thumbnail-link img{display:block;width:100%!important;height:52px!important;object-fit:cover!important;border-radius:6px!important;}
+.productView[data-entity-id="114"] .productView-thumbnail-link{display:block;width:82px;background:#fff;border:1px solid #e6ddcd;border-radius:12px;padding:6px;box-shadow:0 1px 2px rgba(60,50,30,.05);transition:border-color .16s ease,box-shadow .16s ease;}
+.productView[data-entity-id="114"] .productView-thumbnail-link img{display:block;width:100%!important;height:88px!important;object-fit:cover!important;border-radius:7px!important;}
 .productView[data-entity-id="114"] .productView-thumbnail-link:hover{border-color:#c9b48f;}
-.productView[data-entity-id="114"] .productView-thumbnail-link.is-active{opacity:1;border-color:#8E5BB5;box-shadow:0 0 0 3px rgba(142,91,181,.18),0 3px 10px rgba(0,0,0,.08);}
+.productView[data-entity-id="114"] .productView-thumbnail-link.is-active{border-color:#8E5BB5;box-shadow:0 0 0 2px rgba(142,91,181,.30);}
+/* custom arrow controls flanking the rail */
+.productView[data-entity-id="114"] .sd-thumb-wrap{position:relative;}
+.productView[data-entity-id="114"] .sd-thumb-nav{position:absolute;top:50%;transform:translateY(-50%);width:34px;height:34px;border-radius:50%;background:#fff;border:1px solid #e6ddcd;box-shadow:0 2px 8px rgba(60,50,30,.12);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:19px;line-height:1;color:#6b6558;padding:0;z-index:5;transition:box-shadow .16s ease,border-color .16s ease;}
+.productView[data-entity-id="114"] .sd-thumb-nav:hover{box-shadow:0 4px 12px rgba(60,50,30,.18);border-color:#c9b48f;}
+.productView[data-entity-id="114"] .sd-thumb-nav.prev{left:2px;}
+.productView[data-entity-id="114"] .sd-thumb-nav.next{right:2px;}
+/* toddler mobile: keep the full-bleed section inside the viewport (the negative
+   margins overflow on small screens), stack cleanly, single-column trust props */
+@media (max-width:800px){
+  .productView[data-entity-id="114"]{margin-left:0!important;margin-right:0!important;width:auto!important;padding:20px 16px!important;}
+  .productView[data-entity-id="114"] .productView-image{padding:16px!important;}
+  .productView[data-entity-id="114"] .sd-pricing{padding:20px!important;}
+  .productView[data-entity-id="114"] .sd-title-row{flex-wrap:wrap!important;}
+  .productView[data-entity-id="114"] .sd-trust{grid-template-columns:1fr!important;}
+  .productView[data-entity-id="114"] .productView-thumbnails{padding:0 42px!important;}
+  .productView[data-entity-id="114"] .productView-thumbnail-link{width:72px;}
+}
+html,body{overflow-x:hidden;}
+/* mobile product layout (all product pages): the mirrored theme leaves the two
+   columns at fixed percentage widths, which overflow small screens. Force the
+   columns to stack full-width, cap every descendant to its container, and keep a
+   sane container gutter so nothing spills past the viewport. */
+@media (max-width:800px){
+  html,body{max-width:100%!important;}
+  .container{padding-left:16px!important;padding-right:16px!important;max-width:100%!important;}
+  .productView{display:block!important;padding-left:0!important;padding-right:0!important;}
+  .productView, .productView *{max-width:100%!important;box-sizing:border-box!important;}
+  .productView-images,.productView-image,.productView-details{width:100%!important;float:none!important;padding-left:0!important;padding-right:0!important;}
+  .sd-pricing{max-width:none!important;}
+}
 /* mobile: let the hero image size to its natural height (single column, so no
    balance concern) — removes the tall letterboxed box that pushed content down */
 @media (max-width:800px){

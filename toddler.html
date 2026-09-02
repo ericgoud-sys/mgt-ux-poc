@@ -3284,5 +3284,29 @@ document.addEventListener("DOMContentLoaded", function () {
 })();
 </script>
 <!-- SD-HEADER:END -->
+<!-- SD-THUMBNAV:START -->
+<script>
+(function(){
+  function init(){
+    var pv=document.querySelector('.productView[data-entity-id="114"]'); if(!pv) return false;
+    var ul=pv.querySelector('.productView-thumbnails'); var list=ul&&ul.querySelector('.slick-list');
+    if(!ul||!list) return false;
+    if(ul.parentNode && ul.parentNode.classList.contains('sd-thumb-wrap')) return true;
+    var host=document.createElement('div'); host.className='sd-thumb-wrap';
+    ul.parentNode.insertBefore(host, ul); host.appendChild(ul);
+    function mk(cls,g){var b=document.createElement('button');b.type='button';b.className='sd-thumb-nav '+cls;b.setAttribute('aria-label',cls==='prev'?'Previous images':'Next images');b.textContent=g;return b;}
+    var prev=mk('prev','\u2039'), next=mk('next','\u203A'); host.appendChild(prev); host.appendChild(next);
+    function step(){ return Math.round(list.clientWidth*0.72); }
+    function upd(){ prev.style.opacity=list.scrollLeft<=2?'.35':'1'; next.style.opacity=(list.scrollLeft>=list.scrollWidth-list.clientWidth-2)?'.35':'1'; }
+    prev.addEventListener('click',function(){list.scrollBy({left:-step(),behavior:'smooth'});});
+    next.addEventListener('click',function(){list.scrollBy({left:step(),behavior:'smooth'});});
+    list.addEventListener('scroll',upd); upd();
+    return true;
+  }
+  var tries=0, t=setInterval(function(){ if(init()||++tries>20) clearInterval(t); }, 250);
+  window.addEventListener('load', init);
+})();
+</script>
+<!-- SD-THUMBNAV:END -->
 </body>
 </html>
