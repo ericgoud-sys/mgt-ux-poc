@@ -22,6 +22,22 @@ body{font-weight:500}
   .productView[data-entity-id="114"] .productView-img-container::after{padding-bottom:75%!important;}
   .productView[data-entity-id="114"] .productView-img-container img{object-fit:cover!important;}
 }
+/* toddler layout: the title now lives inside the buy box, so hide the emptied
+   product-data block — this floats the buy box to the top of the right column,
+   aligning it with the image card */
+.productView[data-entity-id="114"] .productView-details.product-data{display:none!important;}
+/* match the image card's corner radius to the buy box */
+.productView[data-entity-id="114"] .productView-images{border-radius:14px!important;}
+/* title inside the buy box: snug at the top with a divider line beneath it */
+.productView[data-entity-id="114"] .sd-pricing .sd-title-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:0 0 16px;padding-bottom:16px;border-bottom:1px solid #ece3d3;}
+.productView[data-entity-id="114"] .sd-pricing .productView-title{margin:0!important;font-size:23px;line-height:1.2;}
+@media (min-width:801px){
+  /* shipping note: below the image card, on the purple (its own left-column block) */
+  .productView[data-entity-id="114"] .sd-ship-col{clear:left;float:left;width:50%;box-sizing:border-box;padding:16px 1rem 0;}
+  /* body/kit column: tighten the gap under the buy box */
+  .productView[data-entity-id="114"] .sd-desc-col{padding-top:0!important;}
+  .productView[data-entity-id="114"] .sd-pricing{margin-bottom:18px!important;}
+}
 /* mobile: let the hero image size to its natural height (single column, so no
    balance concern) — removes the tall letterboxed box that pushed content down */
 @media (max-width:800px){
