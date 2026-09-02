@@ -52,18 +52,20 @@ body{font-weight:500}
 /* remove the hover-zoom (easyzoom) on the main image */
 .productView[data-entity-id="114"] .easyzoom-flyout{display:none!important;}
 .productView[data-entity-id="114"] .productView-img-container a{cursor:default!important;pointer-events:none!important;}
-.productView[data-entity-id="114"] .productView-thumbnails{margin-top:20px!important;padding:0 48px!important;position:relative;}
-.productView[data-entity-id="114"] .productView-thumbnail{padding:0 6px!important;}
-.productView[data-entity-id="114"] .productView-thumbnail-link{display:block;background:#fff;border:1.5px solid #e6ddcd;border-radius:12px;overflow:hidden;transition:border-color .16s ease,box-shadow .16s ease,opacity .16s ease;}
-.productView[data-entity-id="114"] .productView-thumbnail-link img{display:block;width:100%!important;height:60px!important;object-fit:cover!important;border-radius:0!important;}
-.productView[data-entity-id="114"] .productView-thumbnail-link:not(.is-active){opacity:.68;}
+/* show all 7 thumbnails in one static, equal-width row — bypass the slick
+   carousel transform and hide its arrows (cleaner than paginating 7 items) */
+.productView[data-entity-id="114"] .productView-thumbnails{margin-top:18px!important;padding:0!important;position:relative;}
+.productView[data-entity-id="114"] .productView-thumbnails .slick-list{overflow:visible!important;}
+.productView[data-entity-id="114"] .productView-thumbnails .slick-track{width:100%!important;transform:none!important;display:flex!important;gap:8px!important;}
+.productView[data-entity-id="114"] .productView-thumbnails .slick-slide{width:auto!important;flex:1 1 0!important;float:none!important;height:auto!important;}
+.productView[data-entity-id="114"] .productView-thumbnails .slick-cloned{display:none!important;}
+.productView[data-entity-id="114"] .slick-prev,.productView[data-entity-id="114"] .slick-next{display:none!important;}
+.productView[data-entity-id="114"] .productView-thumbnail{padding:0!important;margin:0!important;}
+.productView[data-entity-id="114"] .productView-thumbnail-link{display:block;border:1.5px solid #e6ddcd;border-radius:10px;overflow:hidden;transition:border-color .16s ease,box-shadow .16s ease,opacity .16s ease;}
+.productView[data-entity-id="114"] .productView-thumbnail-link img{display:block;width:100%!important;height:66px!important;object-fit:cover!important;border-radius:0!important;}
+.productView[data-entity-id="114"] .productView-thumbnail-link:not(.is-active){opacity:.6;}
 .productView[data-entity-id="114"] .productView-thumbnail-link:hover{opacity:1;border-color:#c9b48f;}
 .productView[data-entity-id="114"] .productView-thumbnail-link.is-active{opacity:1;border-color:#8E5BB5;box-shadow:0 0 0 3px rgba(142,91,181,.18),0 3px 10px rgba(0,0,0,.08);}
-.productView[data-entity-id="114"] .slick-prev,.productView[data-entity-id="114"] .slick-next{width:38px;height:38px;border:1px solid #eadfce;border-radius:50%;background:#fff;box-shadow:0 2px 8px rgba(60,50,30,.10);z-index:3;transition:box-shadow .16s ease,border-color .16s ease;}
-.productView[data-entity-id="114"] .slick-prev:hover,.productView[data-entity-id="114"] .slick-next:hover{box-shadow:0 4px 12px rgba(60,50,30,.16);border-color:#d9c9ab;}
-.productView[data-entity-id="114"] .slick-prev:before,.productView[data-entity-id="114"] .slick-next:before{color:#6b6558;font-size:18px;opacity:1;}
-.productView[data-entity-id="114"] .slick-prev{left:0!important;}
-.productView[data-entity-id="114"] .slick-next{right:0!important;}
 /* mobile: let the hero image size to its natural height (single column, so no
    balance concern) — removes the tall letterboxed box that pushed content down */
 @media (max-width:800px){
