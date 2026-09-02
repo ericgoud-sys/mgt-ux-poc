@@ -19,8 +19,8 @@ body{font-weight:500}
 @media (min-width:801px){
   .productView[data-entity-id="114"] .productView-image{min-height:0!important;}
   .productView[data-entity-id="114"] .productView-img-container{max-width:none!important;}
-  .productView[data-entity-id="114"] .productView-img-container::after{padding-bottom:75%!important;}
-  .productView[data-entity-id="114"] .productView-img-container img{object-fit:cover!important;}
+  .productView[data-entity-id="114"] .productView-img-container::after{padding-bottom:125%!important;}
+  .productView[data-entity-id="114"] .productView-img-container img{object-fit:contain!important;}
 }
 /* toddler: full-bleed the purple background across the whole viewport while
    keeping the inner cards where they are (calc is parent-relative, so no
@@ -41,14 +41,20 @@ body{font-weight:500}
 .productView[data-entity-id="114"] .sd-buy-row .sd-cta{flex:1 1 auto;width:auto;height:46px;padding:0 15px;display:flex;align-items:center;justify-content:center;}
 .productView[data-entity-id="114"] .sd-trust{display:grid;grid-template-columns:1fr 1fr;justify-content:start;text-align:left;gap:10px 22px;}
 .productView[data-entity-id="114"] .sd-trust span{white-space:normal;align-items:flex-start;}
-/* toddler gallery: rounded image box + bordered thumbnail tiles + chevron buttons */
-.productView[data-entity-id="114"] .productView-images{border-radius:16px!important;}
-.productView[data-entity-id="114"] .productView-thumbnail-link{border:1px solid #e2d8c6;border-radius:10px;overflow:hidden;display:block;}
+/* toddler gallery: portrait image box on a light-grey field, current landscape
+   assets centered/contained; thumbnails become tiles on the purple with chevron
+   buttons. The white wrapper card is neutralised so the grey box + tiles stand
+   on the page background. */
+.productView[data-entity-id="114"] .productView-images,.productView[data-entity-id="114"] .productView-image{background:transparent!important;padding:0!important;border:0!important;box-shadow:none!important;border-radius:0!important;}
+.productView[data-entity-id="114"] .productView-img-container{background:#eeece8!important;border-radius:16px!important;overflow:hidden!important;}
+.productView[data-entity-id="114"] .productView-thumbnails{margin-top:16px!important;}
+.productView[data-entity-id="114"] .productView-thumbnail-link{background:#fff;border:1px solid #e6ddcd;border-radius:10px;overflow:hidden;display:block;}
 .productView[data-entity-id="114"] .productView-thumbnail-link img{border-radius:9px;display:block;}
-.productView[data-entity-id="114"] .productView-thumbnail-link.is-active{border-color:#8E5BB5;box-shadow:0 0 0 1px #8E5BB5;}
-.productView[data-entity-id="114"] .slick-prev,.productView[data-entity-id="114"] .slick-next{width:34px;height:34px;border:1px solid #e2d8c6;border-radius:9px;background:#fff;}
-.productView[data-entity-id="114"] .slick-prev{left:-6px;}
-.productView[data-entity-id="114"] .slick-next{right:-6px;}
+.productView[data-entity-id="114"] .productView-thumbnail-link.is-active{border-color:#8E5BB5;box-shadow:0 0 0 2px #8E5BB5;}
+.productView[data-entity-id="114"] .slick-prev,.productView[data-entity-id="114"] .slick-next{width:36px;height:36px;border:1px solid #e6ddcd;border-radius:10px;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.06);}
+.productView[data-entity-id="114"] .slick-prev:before,.productView[data-entity-id="114"] .slick-next:before{color:#6b6558;}
+.productView[data-entity-id="114"] .slick-prev{left:-8px;}
+.productView[data-entity-id="114"] .slick-next{right:-8px;}
 /* mobile: let the hero image size to its natural height (single column, so no
    balance concern) — removes the tall letterboxed box that pushed content down */
 @media (max-width:800px){
