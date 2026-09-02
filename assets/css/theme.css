@@ -20,7 +20,7 @@ body{font-weight:500}
   .productView[data-entity-id="114"] .productView-image{min-height:0!important;}
   .productView[data-entity-id="114"] .productView-img-container{max-width:none!important;}
   .productView[data-entity-id="114"] .productView-img-container::after{padding-bottom:125%!important;}
-  .productView[data-entity-id="114"] .productView-img-container img{object-fit:contain!important;}
+  .productView[data-entity-id="114"] .productView-img-container img{object-fit:cover!important;object-position:center!important;}
 }
 /* toddler: full-bleed the purple background across the whole viewport while
    keeping the inner cards where they are (calc is parent-relative, so no
