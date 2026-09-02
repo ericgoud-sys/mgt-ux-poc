@@ -58,13 +58,13 @@ body{font-weight:500}
 .productView[data-entity-id="114"] .productView-thumbnails{margin-top:20px!important;padding:0 46px!important;position:relative!important;}
 .productView[data-entity-id="114"] .productView-thumbnails .slick-list{width:100%!important;overflow-x:auto!important;overflow-y:visible!important;scroll-behavior:smooth;margin:0!important;padding:4px 0!important;-ms-overflow-style:none;scrollbar-width:none;}
 .productView[data-entity-id="114"] .productView-thumbnails .slick-list::-webkit-scrollbar{display:none;}
-.productView[data-entity-id="114"] .productView-thumbnails .slick-track{width:auto!important;transform:none!important;display:flex!important;gap:24px!important;}
+.productView[data-entity-id="114"] .productView-thumbnails .slick-track{width:auto!important;transform:none!important;display:flex!important;gap:12px!important;}
 .productView[data-entity-id="114"] .productView-thumbnails .slick-slide{width:auto!important;flex:0 0 auto!important;float:none!important;height:auto!important;}
 .productView[data-entity-id="114"] .productView-thumbnails .slick-cloned{display:none!important;}
 .productView[data-entity-id="114"] .slick-prev,.productView[data-entity-id="114"] .slick-next{display:none!important;}
 .productView[data-entity-id="114"] .productView-thumbnail{padding:0!important;margin:0!important;}
 .productView[data-entity-id="114"] .productView-thumbnail-link{display:block;width:82px;background:#fff;border:1px solid #e6ddcd;border-radius:12px;padding:6px;box-shadow:0 1px 2px rgba(60,50,30,.05);transition:border-color .16s ease,box-shadow .16s ease;}
-.productView[data-entity-id="114"] .productView-thumbnail-link img{display:block;width:100%!important;height:88px!important;object-fit:cover!important;border-radius:7px!important;}
+.productView[data-entity-id="114"] .productView-thumbnail-link img{display:block;width:100%!important;height:auto!important;aspect-ratio:4/5!important;object-fit:cover!important;border-radius:7px!important;}
 .productView[data-entity-id="114"] .productView-thumbnail-link:hover{border-color:#c9b48f;}
 .productView[data-entity-id="114"] .productView-thumbnail-link.is-active{border-color:#8E5BB5;box-shadow:0 0 0 2px rgba(142,91,181,.30);}
 /* custom arrow controls flanking the rail */
