@@ -63,8 +63,8 @@ body{font-weight:500}
 .productView[data-entity-id="114"] .productView-thumbnails .slick-cloned{display:none!important;}
 .productView[data-entity-id="114"] .slick-prev,.productView[data-entity-id="114"] .slick-next{display:none!important;}
 .productView[data-entity-id="114"] .productView-thumbnail{padding:0!important;margin:0!important;}
-.productView[data-entity-id="114"] .productView-thumbnail-link{display:block;width:82px;background:#fff;border:1px solid #e6ddcd;border-radius:12px;padding:6px;box-shadow:0 1px 2px rgba(60,50,30,.05);transition:border-color .16s ease,box-shadow .16s ease;}
-.productView[data-entity-id="114"] .productView-thumbnail-link img{display:block;width:100%!important;height:auto!important;aspect-ratio:4/5!important;object-fit:contain!important;border-radius:7px!important;}
+.productView[data-entity-id="114"] .productView-thumbnail-link{display:block!important;width:82px!important;height:99px!important;box-sizing:border-box!important;background:#fff;border:1px solid #e6ddcd;border-radius:12px;padding:6px!important;box-shadow:0 1px 2px rgba(60,50,30,.05);transition:border-color .16s ease,box-shadow .16s ease;}
+.productView[data-entity-id="114"] .productView-thumbnail-link img{display:block!important;width:100%!important;height:100%!important;max-width:none!important;object-fit:contain!important;border-radius:7px!important;}
 .productView[data-entity-id="114"] .productView-thumbnail-link:hover{border-color:#c9b48f;}
 .productView[data-entity-id="114"] .productView-thumbnail-link.is-active{border-color:#8E5BB5;box-shadow:0 0 0 2px rgba(142,91,181,.30);}
 /* custom arrow controls flanking the rail */
@@ -82,7 +82,7 @@ body{font-weight:500}
   .productView[data-entity-id="114"] .sd-title-row{flex-wrap:wrap!important;}
   .productView[data-entity-id="114"] .sd-trust{grid-template-columns:1fr!important;}
   .productView[data-entity-id="114"] .productView-thumbnails{padding:0 42px!important;}
-  .productView[data-entity-id="114"] .productView-thumbnail-link{width:72px;}
+  .productView[data-entity-id="114"] .productView-thumbnail-link{width:72px!important;height:88px!important;}
 }
 html,body{overflow-x:hidden;}
 /* mobile product layout (all product pages): the mirrored theme leaves the two
