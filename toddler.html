@@ -1047,8 +1047,7 @@ class="lazyload"
   <div class="sd-perchild" data-sd-perchild></div>
   <div class="sd-field"><label>Class Size</label><select data-sd-size></select></div>
   <div class="sd-divider"><div class="sd-field" style="margin-bottom:0;"><label>Start Month</label><select data-sd-month></select><div class="sd-caption" data-sd-caption></div></div></div>
-  <div class="sd-field sd-qtyfield"><label>Quantity</label><div class="sd-stepper"><button type="button" data-qdec aria-label="Decrease quantity">−</button><input type="text" inputmode="numeric" data-sd-qty value="1" aria-label="Quantity"><button type="button" data-qinc aria-label="Increase quantity">+</button></div></div>
-  <button class="sd-cta" data-sd-cta>Add to Cart</button>
+  <div class="sd-buy-row"><div class="sd-field sd-qtyfield"><label>Quantity</label><div class="sd-stepper"><button type="button" data-qdec aria-label="Decrease quantity">−</button><input type="text" inputmode="numeric" data-sd-qty value="1" aria-label="Quantity"><button type="button" data-qinc aria-label="Increase quantity">+</button></div></div><button class="sd-cta" data-sd-cta>Add to Cart</button></div>
   <div class="sd-sales"><a>Have a larger classroom? Talk to sales</a></div>
   <div class="sd-trust-divider"></div>
   <div class="sd-trust"><span>Trusted for 40+ years</span><span>Aligned to all 50 states</span><span>Built on the Science of Reading</span><span>Cancel anytime</span></div>
@@ -3189,7 +3188,34 @@ document.addEventListener("DOMContentLoaded", function () {
 </script><script data-bc-cookie-consent="3" type="text/plain">
   document.body.insertAdjacentHTML('afterbegin', '<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K2TQZ48M" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>');
 </script>
-    <script>window.__CF$cv$params={r:'a325a0491b7eeb9f',t:'MTc4Nzk0NDMzMQ==',u:'01a049c96b6c7cb29749e37c4272b734',ut:'riIXVNjHV65LSKrzNnn4h9zLSrv3lkpiVcJ32BwoVBE-1787944332-1.2.1.1-_gyMEM.G8Om98vu3.bC8rrde5TQGCDXfNr5eDb49okT1BjRuKXmsTCShP4onyfr7S590dKArUSYpLy23rQs4f0XKB.nmMiSO35hx8N_LoGc',i:60};(function(){if(!document.body)return;var s=document.createElement('script');s.src='/cdn-cgi/challenge-platform/scripts/precursor/main.js';document.head.appendChild(s);})();</script><!-- SD-STICKY:START -->
+    <script>window.__CF$cv$params={r:'a325a0491b7eeb9f',t:'MTc4Nzk0NDMzMQ==',u:'01a049c96b6c7cb29749e37c4272b734',ut:'riIXVNjHV65LSKrzNnn4h9zLSrv3lkpiVcJ32BwoVBE-1787944332-1.2.1.1-_gyMEM.G8Om98vu3.bC8rrde5TQGCDXfNr5eDb49okT1BjRuKXmsTCShP4onyfr7S590dKArUSYpLy23rQs4f0XKB.nmMiSO35hx8N_LoGc',i:60};(function(){if(!document.body)return;var s=document.createElement('script');s.src='/cdn-cgi/challenge-platform/scripts/precursor/main.js';document.head.appendChild(s);})();</script><!-- SD-HEADER:START -->
+<style>
+  .header-cart{position:relative;}
+  .sd-cart-badge{position:absolute;top:-7px;right:-9px;min-width:19px;height:19px;padding:0 5px;border-radius:999px;background:#FB5541;color:#fff;font-size:11px;font-weight:800;line-height:19px;text-align:center;display:none;box-shadow:0 1px 3px rgba(0,0,0,.25);}
+  .sd-cart-badge.is-on{display:block;}
+  .header-signIn.sd-signout{cursor:pointer;}
+</style>
+<script>
+(function(){
+  function count(){ try{return (JSON.parse(localStorage.getItem('sd_cart')||'[]')).reduce(function(a,it){return a+(it.qty||1);},0);}catch(e){return 0;} }
+  var cart=document.querySelector('.header-cart'), badge=null;
+  if(cart){ badge=document.createElement('span'); badge.className='sd-cart-badge'; cart.appendChild(badge); }
+  window.sdUpdateCartBadge=function(){ if(!badge) return; var n=count(); badge.textContent=n; badge.classList.toggle('is-on', n>0); };
+  window.sdRefreshHeader=function(){
+    var si=document.querySelector('.header-signIn'); if(!si) return;
+    var u=null; try{u=JSON.parse(localStorage.getItem('sd_user')||'null');}catch(e){}
+    if(u){ si.textContent='Sign out ('+(u.name||u.email||'you')+')'; si.setAttribute('href','#'); si.classList.add('sd-signout');
+      si.onclick=function(ev){ ev.preventDefault(); localStorage.removeItem('sd_user'); window.sdRefreshHeader(); }; }
+    else { si.textContent='Sign in'; si.setAttribute('href','signin.html'); si.classList.remove('sd-signout'); si.onclick=null; }
+  };
+  function refresh(){ window.sdUpdateCartBadge(); window.sdRefreshHeader(); }
+  window.addEventListener('storage', refresh);
+  window.addEventListener('pageshow', refresh);
+  refresh();
+})();
+</script>
+<!-- SD-HEADER:END -->
+<!-- SD-STICKY:START -->
 <div class="sd-stickybar" role="region" aria-label="Add to cart">
   <div class="sd-stickybar__info"><span class="sd-stickybar__name"></span><span class="sd-stickybar__price" data-sd-sticky-price></span></div>
   <button class="sd-stickybar__cta" type="button">Add to Cart</button>
@@ -3258,32 +3284,5 @@ document.addEventListener("DOMContentLoaded", function () {
 })();
 </script>
 <!-- SD-MINICART:END -->
-<!-- SD-HEADER:START -->
-<style>
-  .header-cart{position:relative;}
-  .sd-cart-badge{position:absolute;top:-7px;right:-9px;min-width:19px;height:19px;padding:0 5px;border-radius:999px;background:#FB5541;color:#fff;font-size:11px;font-weight:800;line-height:19px;text-align:center;display:none;box-shadow:0 1px 3px rgba(0,0,0,.25);}
-  .sd-cart-badge.is-on{display:block;}
-  .header-signIn.sd-signout{cursor:pointer;}
-</style>
-<script>
-(function(){
-  function count(){ try{return (JSON.parse(localStorage.getItem('sd_cart')||'[]')).reduce(function(a,it){return a+(it.qty||1);},0);}catch(e){return 0;} }
-  var cart=document.querySelector('.header-cart'), badge=null;
-  if(cart){ badge=document.createElement('span'); badge.className='sd-cart-badge'; cart.appendChild(badge); }
-  window.sdUpdateCartBadge=function(){ if(!badge) return; var n=count(); badge.textContent=n; badge.classList.toggle('is-on', n>0); };
-  window.sdRefreshHeader=function(){
-    var si=document.querySelector('.header-signIn'); if(!si) return;
-    var u=null; try{u=JSON.parse(localStorage.getItem('sd_user')||'null');}catch(e){}
-    if(u){ si.textContent='Sign out ('+(u.name||u.email||'you')+')'; si.setAttribute('href','#'); si.classList.add('sd-signout');
-      si.onclick=function(ev){ ev.preventDefault(); localStorage.removeItem('sd_user'); window.sdRefreshHeader(); }; }
-    else { si.textContent='Sign in'; si.setAttribute('href','signin.html'); si.classList.remove('sd-signout'); si.onclick=null; }
-  };
-  function refresh(){ window.sdUpdateCartBadge(); window.sdRefreshHeader(); }
-  window.addEventListener('storage', refresh);
-  window.addEventListener('pageshow', refresh);
-  refresh();
-})();
-</script>
-<!-- SD-HEADER:END -->
 </body>
 </html>
