@@ -80,7 +80,6 @@ body{font-weight:500}
   .productView.sd-pdp .productView-image{padding:16px!important;}
   .productView.sd-pdp .sd-pricing{padding:20px!important;}
   .productView.sd-pdp .sd-title-row{flex-wrap:wrap!important;}
-  .productView.sd-pdp .sd-trust{grid-template-columns:1fr!important;}
   .productView.sd-pdp .productView-thumbnails{padding:0 42px!important;}
   .productView.sd-pdp .productView-thumbnail-link{width:72px!important;height:88px!important;}
 }
@@ -119,4 +118,10 @@ html,body{overflow-x:hidden;}
    rounded tile so cards echo the product-page hero */
 .kit-card__image-wrap{height:auto!important;}
 .kit-card__image{width:184px!important;height:230px!important;max-height:none!important;object-fit:cover!important;border-radius:14px!important;box-shadow:0 2px 10px rgba(60,50,30,.10)!important;}
+/* Bestseller enhancement badge (distinct colour from the teal Teacher Favorite) */
+.enhancement-card__badge--bestseller{background:#FB5541!important;}
+/* mobile: keep the shipping & delivery note left-aligned */
+@media (max-width:800px){
+  .sd-shipping-note,.sd-shipping-note p{text-align:left!important;}
+}
 /* SD-TYPO:END */
