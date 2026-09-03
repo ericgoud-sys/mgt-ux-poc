@@ -124,4 +124,11 @@ html,body{overflow-x:hidden;}
 @media (max-width:800px){
   .sd-shipping-note,.sd-shipping-note p{text-align:left!important;}
 }
+/* marketing band: tighter vertical rhythm + body copy sized to match the
+   enhancement-card description (16px) */
+.preschool-band{padding:26px 0 30px!important;}
+.preschool-band__inner{gap:44px!important;}
+.preschool-band__text{font-size:16px!important;line-height:1.55!important;}
+.preschool-band__image{-ms-flex:0 0 40%!important;flex:0 0 40%!important;}
+.preschool-band__image img{max-width:390px!important;margin-bottom:0!important;}
 /* SD-TYPO:END */
