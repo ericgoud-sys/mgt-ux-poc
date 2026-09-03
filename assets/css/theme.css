@@ -4,7 +4,26 @@
 /* Type scale: 6 tokens, referenced everywhere via var() so sizes stay consistent
    (caption 12 · meta 14 · body 16 · subhead 20 · title 26 · display 34;
    a single 46px display-xl remains an intentional exception for pay/section heros) */
-:root{--fs-caption:11px;--fs-meta:12px;--fs-body:15px;--fs-subhead:18px;--fs-title:26px;--fs-display:34px;}
+/* root base as % (== 14px at the browser default) so rem respects the user's
+   font-size preference — the accessibility win a fixed px base gives up */
+html{font-size:87.5%!important;}
+/* composed scale (base 15, ~1.26 ratio on the upper steps; rem-based; title &
+   display fluid via clamp). Companion line-heights + weights pair with the sizes
+   so each token is a full type style, not just a size. 1rem = 14px. */
+:root{
+  --fs-caption:0.786rem;   /* 11 */
+  --fs-meta:0.857rem;      /* 12 */
+  --fs-body:1.071rem;      /* 15 — base */
+  --fs-subhead:1.357rem;   /* 19 */
+  --fs-title:clamp(1.571rem, 1.35rem + 1vw, 1.714rem);      /* 22 → 24 */
+  --fs-display:clamp(1.857rem, 1.45rem + 1.8vw, 2.143rem);  /* 26 → 30 */
+  --lh-tight:1.12; --lh-snug:1.3; --lh-body:1.55;
+  --fw-body:500; --fw-strong:700; --fw-display:800;
+}
+/* pair leading + tracking + weight onto the headline roles */
+.sd-flow h1,.sd-price,.productView-title,.enhancement-card__title,.sd-summary-total{
+  line-height:var(--lh-tight)!important;letter-spacing:-.01em;font-weight:var(--fw-display);
+}
 /* snap the main mirrored-theme components onto the scale */
 .enhancement-card__title{font-size:var(--fs-title)!important}
 .enhancement-card__description,.enhancement-card__link{font-size:var(--fs-body)!important}
