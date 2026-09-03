@@ -17,9 +17,13 @@ html{font-size:87.5%!important;}
   --fs-subhead:1.429rem;   /* 20 */
   --fs-title:clamp(1.571rem, 1.35rem + 1vw, 1.714rem);      /* 22 → 24 */
   --fs-display:clamp(1.857rem, 1.45rem + 1.8vw, 2.143rem);  /* 26 → 30 */
+  --fs-label:0.786rem;     /* 11 — uppercase eyebrow / field labels */
   --lh-tight:1.12; --lh-snug:1.3; --lh-body:1.55;
   --fw-body:500; --fw-strong:700; --fw-display:800;
 }
+/* PDP uppercase label treatments (kit-includes headings + buy-box field labels)
+   sit one notch below caption */
+.sd-includes span,.sd-pricing .sd-field label{font-size:var(--fs-label)!important}
 /* pair leading + tracking + weight onto the headline roles */
 .sd-flow h1,.sd-price,.productView-title,.enhancement-card__title,.sd-summary-total{
   line-height:var(--lh-tight)!important;letter-spacing:-.01em;font-weight:var(--fw-display);
