@@ -31,6 +31,9 @@ html{font-size:87.5%!important;}
 /* enhancement price was oversized (30px) — bring it under the card title */
 .enhancement-card__price strong{font-size:var(--fs-subhead)!important}
 .enhancement-card__price span{font-size:var(--fs-meta)!important}
+/* homepage kit-card price (29px) — same treatment, under the 23px title */
+.kit-card__price strong{font-size:var(--fs-subhead)!important}
+.kit-card__price span,.kit-card__price small{font-size:var(--fs-meta)!important}
 /* trust value props: a touch larger + still fit two-up */
 .sd-pricing .sd-trust{font-size:var(--fs-meta)!important}
 /* "Teacher/Child Kit Includes" -> small uppercase label (colon stripped in HTML) */
