@@ -67,7 +67,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         
         <script nonce="" async src="assets/theme/dist/theme-bundle.font.js"></script>
 
-        <link data-stencil-stylesheet href="assets/css/theme.css?v=g5" rel="stylesheet">
+        <link data-stencil-stylesheet href="assets/css/theme.css?v=g6" rel="stylesheet">
 
         <!-- Start Tracking Code for analytics_facebook -->
 
@@ -3188,58 +3188,7 @@ document.addEventListener("DOMContentLoaded", function () {
 </script><script data-bc-cookie-consent="3" type="text/plain">
   document.body.insertAdjacentHTML('afterbegin', '<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K2TQZ48M" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>');
 </script>
-    <script>window.__CF$cv$params={r:'a325a0491b7eeb9f',t:'MTc4Nzk0NDMzMQ==',u:'01a049c96b6c7cb29749e37c4272b734',ut:'riIXVNjHV65LSKrzNnn4h9zLSrv3lkpiVcJ32BwoVBE-1787944332-1.2.1.1-_gyMEM.G8Om98vu3.bC8rrde5TQGCDXfNr5eDb49okT1BjRuKXmsTCShP4onyfr7S590dKArUSYpLy23rQs4f0XKB.nmMiSO35hx8N_LoGc',i:60};(function(){if(!document.body)return;var s=document.createElement('script');s.src='/cdn-cgi/challenge-platform/scripts/precursor/main.js';document.head.appendChild(s);})();</script><!-- SD-HEADER:START -->
-<style>
-  .header-cart{position:relative;}
-  .sd-cart-badge{position:absolute;top:-7px;right:-9px;min-width:19px;height:19px;padding:0 5px;border-radius:999px;background:#FB5541;color:#fff;font-size:11px;font-weight:800;line-height:19px;text-align:center;display:none;box-shadow:0 1px 3px rgba(0,0,0,.25);}
-  .sd-cart-badge.is-on{display:block;}
-  .header-signIn.sd-signout{cursor:pointer;}
-</style>
-<script>
-(function(){
-  function count(){ try{return (JSON.parse(localStorage.getItem('sd_cart')||'[]')).reduce(function(a,it){return a+(it.qty||1);},0);}catch(e){return 0;} }
-  var cart=document.querySelector('.header-cart'), badge=null;
-  if(cart){ badge=document.createElement('span'); badge.className='sd-cart-badge'; cart.appendChild(badge); }
-  window.sdUpdateCartBadge=function(){ if(!badge) return; var n=count(); badge.textContent=n; badge.classList.toggle('is-on', n>0); };
-  window.sdRefreshHeader=function(){
-    var si=document.querySelector('.header-signIn'); if(!si) return;
-    var u=null; try{u=JSON.parse(localStorage.getItem('sd_user')||'null');}catch(e){}
-    if(u){ si.textContent='Sign out ('+(u.name||u.email||'you')+')'; si.setAttribute('href','#'); si.classList.add('sd-signout');
-      si.onclick=function(ev){ ev.preventDefault(); localStorage.removeItem('sd_user'); window.sdRefreshHeader(); }; }
-    else { si.textContent='Sign in'; si.setAttribute('href','signin.html'); si.classList.remove('sd-signout'); si.onclick=null; }
-  };
-  function refresh(){ window.sdUpdateCartBadge(); window.sdRefreshHeader(); }
-  window.addEventListener('storage', refresh);
-  window.addEventListener('pageshow', refresh);
-  refresh();
-})();
-</script>
-<!-- SD-HEADER:END -->
-<!-- SD-THUMBNAV:START -->
-<script>
-(function(){
-  function init(){
-    var pv=document.querySelector('.productView.sd-pdp'); if(!pv) return false;
-    var ul=pv.querySelector('.productView-thumbnails'); var list=ul&&ul.querySelector('.slick-list');
-    if(!ul||!list) return false;
-    if(ul.parentNode && ul.parentNode.classList.contains('sd-thumb-wrap')) return true;
-    var host=document.createElement('div'); host.className='sd-thumb-wrap';
-    ul.parentNode.insertBefore(host, ul); host.appendChild(ul);
-    function mk(cls,g){var b=document.createElement('button');b.type='button';b.className='sd-thumb-nav '+cls;b.setAttribute('aria-label',cls==='prev'?'Previous images':'Next images');b.textContent=g;return b;}
-    var prev=mk('prev','\u2039'), next=mk('next','\u203A'); host.appendChild(prev); host.appendChild(next);
-    function step(){ return Math.round(list.clientWidth*0.72); }
-    function upd(){ prev.style.opacity=list.scrollLeft<=2?'.35':'1'; next.style.opacity=(list.scrollLeft>=list.scrollWidth-list.clientWidth-2)?'.35':'1'; }
-    prev.addEventListener('click',function(){list.scrollBy({left:-step(),behavior:'smooth'});});
-    next.addEventListener('click',function(){list.scrollBy({left:step(),behavior:'smooth'});});
-    list.addEventListener('scroll',upd); upd();
-    return true;
-  }
-  var tries=0, t=setInterval(function(){ if(init()||++tries>20) clearInterval(t); }, 250);
-  window.addEventListener('load', init);
-})();
-</script>
-<!-- SD-THUMBNAV:END -->
-<!-- SD-STICKY:START -->
+    <script>window.__CF$cv$params={r:'a325a0491b7eeb9f',t:'MTc4Nzk0NDMzMQ==',u:'01a049c96b6c7cb29749e37c4272b734',ut:'riIXVNjHV65LSKrzNnn4h9zLSrv3lkpiVcJ32BwoVBE-1787944332-1.2.1.1-_gyMEM.G8Om98vu3.bC8rrde5TQGCDXfNr5eDb49okT1BjRuKXmsTCShP4onyfr7S590dKArUSYpLy23rQs4f0XKB.nmMiSO35hx8N_LoGc',i:60};(function(){if(!document.body)return;var s=document.createElement('script');s.src='/cdn-cgi/challenge-platform/scripts/precursor/main.js';document.head.appendChild(s);})();</script><!-- SD-STICKY:START -->
 <div class="sd-stickybar" role="region" aria-label="Add to cart">
   <div class="sd-stickybar__info"><span class="sd-stickybar__name"></span><span class="sd-stickybar__price" data-sd-sticky-price></span></div>
   <button class="sd-stickybar__cta" type="button">Add to Cart</button>
@@ -3308,5 +3257,56 @@ document.addEventListener("DOMContentLoaded", function () {
 })();
 </script>
 <!-- SD-MINICART:END -->
+<!-- SD-HEADER:START -->
+<style>
+  .header-cart{position:relative;}
+  .sd-cart-badge{position:absolute;top:-7px;right:-9px;min-width:19px;height:19px;padding:0 5px;border-radius:999px;background:#FB5541;color:#fff;font-size:11px;font-weight:800;line-height:19px;text-align:center;display:none;box-shadow:0 1px 3px rgba(0,0,0,.25);}
+  .sd-cart-badge.is-on{display:block;}
+  .header-signIn.sd-signout{cursor:pointer;}
+</style>
+<script>
+(function(){
+  function count(){ try{return (JSON.parse(localStorage.getItem('sd_cart')||'[]')).reduce(function(a,it){return a+(it.qty||1);},0);}catch(e){return 0;} }
+  var cart=document.querySelector('.header-cart'), badge=null;
+  if(cart){ badge=document.createElement('span'); badge.className='sd-cart-badge'; cart.appendChild(badge); }
+  window.sdUpdateCartBadge=function(){ if(!badge) return; var n=count(); badge.textContent=n; badge.classList.toggle('is-on', n>0); };
+  window.sdRefreshHeader=function(){
+    var si=document.querySelector('.header-signIn'); if(!si) return;
+    var u=null; try{u=JSON.parse(localStorage.getItem('sd_user')||'null');}catch(e){}
+    if(u){ si.textContent='Sign out ('+(u.name||u.email||'you')+')'; si.setAttribute('href','#'); si.classList.add('sd-signout');
+      si.onclick=function(ev){ ev.preventDefault(); localStorage.removeItem('sd_user'); window.sdRefreshHeader(); }; }
+    else { si.textContent='Sign in'; si.setAttribute('href','signin.html'); si.classList.remove('sd-signout'); si.onclick=null; }
+  };
+  function refresh(){ window.sdUpdateCartBadge(); window.sdRefreshHeader(); }
+  window.addEventListener('storage', refresh);
+  window.addEventListener('pageshow', refresh);
+  refresh();
+})();
+</script>
+<!-- SD-HEADER:END -->
+<!-- SD-THUMBNAV:START -->
+<script>
+(function(){
+  function init(){
+    var pv=document.querySelector('.productView.sd-pdp'); if(!pv) return false;
+    var ul=pv.querySelector('.productView-thumbnails'); var list=ul&&ul.querySelector('.slick-list');
+    if(!ul||!list) return false;
+    if(ul.parentNode && ul.parentNode.classList.contains('sd-thumb-wrap')) return true;
+    var host=document.createElement('div'); host.className='sd-thumb-wrap';
+    ul.parentNode.insertBefore(host, ul); host.appendChild(ul);
+    function mk(cls,g){var b=document.createElement('button');b.type='button';b.className='sd-thumb-nav '+cls;b.setAttribute('aria-label',cls==='prev'?'Previous images':'Next images');b.textContent=g;return b;}
+    var prev=mk('prev','\u2039'), next=mk('next','\u203A'); host.appendChild(prev); host.appendChild(next);
+    function step(){ return Math.round(list.clientWidth*0.72); }
+    function upd(){ prev.style.opacity=list.scrollLeft<=2?'.35':'1'; next.style.opacity=(list.scrollLeft>=list.scrollWidth-list.clientWidth-2)?'.35':'1'; }
+    prev.addEventListener('click',function(){list.scrollBy({left:-step(),behavior:'smooth'});});
+    next.addEventListener('click',function(){list.scrollBy({left:step(),behavior:'smooth'});});
+    list.addEventListener('scroll',upd); upd();
+    return true;
+  }
+  var tries=0, t=setInterval(function(){ if(init()||++tries>20) clearInterval(t); }, 250);
+  window.addEventListener('load', init);
+})();
+</script>
+<!-- SD-THUMBNAV:END -->
 </body>
 </html>

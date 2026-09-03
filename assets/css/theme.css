@@ -115,4 +115,8 @@ html,body{overflow-x:hidden;}
   .enhancement-picker{padding:44px 0 48px!important}
   .enhancement-picker__header{margin-bottom:28px!important}
 }
+/* homepage product cards: show the (portrait 4:5) product hero as a uniform,
+   rounded tile so cards echo the product-page hero */
+.kit-card__image-wrap{height:auto!important;}
+.kit-card__image{width:184px!important;height:230px!important;max-height:none!important;object-fit:cover!important;border-radius:14px!important;box-shadow:0 2px 10px rgba(60,50,30,.10)!important;}
 /* SD-TYPO:END */
