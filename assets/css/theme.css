@@ -4,7 +4,7 @@
 /* Type scale: 6 tokens, referenced everywhere via var() so sizes stay consistent
    (caption 12 · meta 14 · body 16 · subhead 20 · title 26 · display 34;
    a single 46px display-xl remains an intentional exception for pay/section heros) */
-:root{--fs-caption:12px;--fs-meta:14px;--fs-body:16px;--fs-subhead:20px;--fs-title:26px;--fs-display:34px;}
+:root{--fs-caption:11px;--fs-meta:12px;--fs-body:15px;--fs-subhead:18px;--fs-title:26px;--fs-display:34px;}
 /* snap the main mirrored-theme components onto the scale */
 .enhancement-card__title{font-size:var(--fs-title)!important}
 .enhancement-card__description,.enhancement-card__link{font-size:var(--fs-body)!important}
