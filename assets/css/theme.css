@@ -17,15 +17,15 @@ body{font-weight:500}
    hover does — 4:3 frame at full column width, no min-height margin, cover fit
    (desktop only; mobile uses natural height) */
 @media (min-width:801px){
-  .productView[data-entity-id="114"] .productView-image{min-height:0!important;}
-  .productView[data-entity-id="114"] .productView-img-container{max-width:none!important;}
-  .productView[data-entity-id="114"] .productView-img-container::after{padding-bottom:125%!important;}
-  .productView[data-entity-id="114"] .productView-img-container img{object-fit:cover!important;object-position:center!important;}
+  .productView.sd-pdp .productView-image{min-height:0!important;}
+  .productView.sd-pdp .productView-img-container{max-width:none!important;}
+  .productView.sd-pdp .productView-img-container::after{padding-bottom:125%!important;}
+  .productView.sd-pdp .productView-img-container img{object-fit:contain!important;object-position:center!important;}
 }
 /* toddler: full-bleed the purple background across the whole viewport while
    keeping the inner cards where they are (calc is parent-relative, so no
    hardcoded widths); square off the corners for an edge-to-edge band */
-.productView[data-entity-id="114"]{
+.productView.sd-pdp{
   margin-left:calc(50% - 50vw)!important;
   margin-right:calc(50% - 50vw)!important;
   padding-left:calc(50vw - 50% + 20px)!important;
@@ -35,54 +35,54 @@ body{font-weight:500}
 }
 /* toddler bottom section: quantity stepper + Add to Cart share one row,
    trust props in an organized two-column grid */
-.productView[data-entity-id="114"] .sd-buy-row{display:flex;gap:14px;align-items:center;}
-.productView[data-entity-id="114"] .sd-buy-row .sd-qtyfield{margin-bottom:0;flex:0 0 auto;}
-.productView[data-entity-id="114"] .sd-buy-row .sd-qtyfield label{display:none;}
-.productView[data-entity-id="114"] .sd-buy-row .sd-cta{flex:1 1 auto;width:auto;height:46px;padding:0 15px;display:flex;align-items:center;justify-content:center;}
-.productView[data-entity-id="114"] .sd-trust{display:grid;grid-template-columns:1fr 1fr;justify-content:start;text-align:left;gap:10px 22px;}
-.productView[data-entity-id="114"] .sd-trust span{white-space:normal;align-items:flex-start;}
+.productView.sd-pdp .sd-buy-row{display:flex;gap:14px;align-items:center;}
+.productView.sd-pdp .sd-buy-row .sd-qtyfield{margin-bottom:0;flex:0 0 auto;}
+.productView.sd-pdp .sd-buy-row .sd-qtyfield label{display:none;}
+.productView.sd-pdp .sd-buy-row .sd-cta{flex:1 1 auto;width:auto;height:46px;padding:0 15px;display:flex;align-items:center;justify-content:center;}
+.productView.sd-pdp .sd-trust{display:grid;grid-template-columns:1fr 1fr;justify-content:start;text-align:left;gap:10px 22px;}
+.productView.sd-pdp .sd-trust span{white-space:normal;align-items:flex-start;}
 /* toddler gallery: portrait image box on a light-grey field, current landscape
    assets centered/contained; thumbnails become tiles on the purple with chevron
    buttons. The white wrapper card is neutralised so the grey box + tiles stand
    on the page background. */
-.productView[data-entity-id="114"] .productView-images{background:transparent!important;padding:0!important;border:0!important;box-shadow:none!important;border-radius:0!important;}
+.productView.sd-pdp .productView-images{background:transparent!important;padding:0!important;border:0!important;box-shadow:none!important;border-radius:0!important;}
 /* white matte/card around the image (24px margin) */
-.productView[data-entity-id="114"] .productView-image{background:#fff!important;border:1px solid #e7ddc9!important;border-radius:14px!important;padding:24px!important;box-shadow:none!important;}
-.productView[data-entity-id="114"] .productView-img-container{background:#eeece8!important;border-radius:10px!important;overflow:hidden!important;}
+.productView.sd-pdp .productView-image{background:#fff!important;border:1px solid #e7ddc9!important;border-radius:14px!important;padding:24px!important;box-shadow:none!important;}
+.productView.sd-pdp .productView-img-container{background:#eeece8!important;border-radius:10px!important;overflow:hidden!important;}
 /* remove the hover-zoom (easyzoom) on the main image */
-.productView[data-entity-id="114"] .easyzoom-flyout{display:none!important;}
-.productView[data-entity-id="114"] .productView-img-container a{cursor:default!important;pointer-events:none!important;}
+.productView.sd-pdp .easyzoom-flyout{display:none!important;}
+.productView.sd-pdp .productView-img-container a{cursor:default!important;pointer-events:none!important;}
 /* thumbnail carousel: fixed portrait tiles (fit the full 4:5 image), 24px gaps,
    native horizontal scroll driven by custom arrow controls on either side.
    Slick's transform/arrows are neutralised so the scroll + our arrows own it. */
-.productView[data-entity-id="114"] .productView-thumbnails{margin-top:20px!important;padding:0 46px!important;position:relative!important;}
-.productView[data-entity-id="114"] .productView-thumbnails .slick-list{width:100%!important;overflow-x:auto!important;overflow-y:visible!important;scroll-behavior:smooth;margin:0!important;padding:4px 0!important;-ms-overflow-style:none;scrollbar-width:none;}
-.productView[data-entity-id="114"] .productView-thumbnails .slick-list::-webkit-scrollbar{display:none;}
-.productView[data-entity-id="114"] .productView-thumbnails .slick-track{width:auto!important;transform:none!important;display:flex!important;gap:12px!important;}
-.productView[data-entity-id="114"] .productView-thumbnails .slick-slide{width:auto!important;flex:0 0 auto!important;float:none!important;height:auto!important;}
-.productView[data-entity-id="114"] .productView-thumbnails .slick-cloned{display:none!important;}
-.productView[data-entity-id="114"] .slick-prev,.productView[data-entity-id="114"] .slick-next{display:none!important;}
-.productView[data-entity-id="114"] .productView-thumbnail{padding:0!important;margin:0!important;}
-.productView[data-entity-id="114"] .productView-thumbnail-link{display:block!important;width:82px!important;height:99px!important;box-sizing:border-box!important;background:#fff;border:1px solid #e6ddcd;border-radius:12px;padding:6px!important;box-shadow:0 1px 2px rgba(60,50,30,.05);transition:border-color .16s ease,box-shadow .16s ease;}
-.productView[data-entity-id="114"] .productView-thumbnail-link img{display:block!important;width:100%!important;height:100%!important;max-width:none!important;object-fit:contain!important;border-radius:7px!important;}
-.productView[data-entity-id="114"] .productView-thumbnail-link:hover{border-color:#c9b48f;}
-.productView[data-entity-id="114"] .productView-thumbnail-link.is-active{border-color:#8E5BB5;box-shadow:0 0 0 2px rgba(142,91,181,.30);}
+.productView.sd-pdp .productView-thumbnails{margin-top:20px!important;padding:0 46px!important;position:relative!important;}
+.productView.sd-pdp .productView-thumbnails .slick-list{width:100%!important;overflow-x:auto!important;overflow-y:visible!important;scroll-behavior:smooth;margin:0!important;padding:4px 0!important;-ms-overflow-style:none;scrollbar-width:none;}
+.productView.sd-pdp .productView-thumbnails .slick-list::-webkit-scrollbar{display:none;}
+.productView.sd-pdp .productView-thumbnails .slick-track{width:auto!important;transform:none!important;display:flex!important;gap:12px!important;}
+.productView.sd-pdp .productView-thumbnails .slick-slide{width:auto!important;flex:0 0 auto!important;float:none!important;height:auto!important;}
+.productView.sd-pdp .productView-thumbnails .slick-cloned{display:none!important;}
+.productView.sd-pdp .slick-prev,.productView.sd-pdp .slick-next{display:none!important;}
+.productView.sd-pdp .productView-thumbnail{padding:0!important;margin:0!important;}
+.productView.sd-pdp .productView-thumbnail-link{display:block!important;width:82px!important;height:99px!important;box-sizing:border-box!important;background:#fff;border:1px solid #e6ddcd;border-radius:12px;padding:6px!important;box-shadow:0 1px 2px rgba(60,50,30,.05);transition:border-color .16s ease,box-shadow .16s ease;}
+.productView.sd-pdp .productView-thumbnail-link img{display:block!important;width:100%!important;height:100%!important;max-width:none!important;object-fit:contain!important;border-radius:7px!important;}
+.productView.sd-pdp .productView-thumbnail-link:hover{border-color:#c9b48f;}
+.productView.sd-pdp .productView-thumbnail-link.is-active{border-color:#8E5BB5;box-shadow:0 0 0 2px rgba(142,91,181,.30);}
 /* custom arrow controls flanking the rail */
-.productView[data-entity-id="114"] .sd-thumb-wrap{position:relative;}
-.productView[data-entity-id="114"] .sd-thumb-nav{position:absolute;top:50%;transform:translateY(-50%);width:34px;height:34px;border-radius:50%;background:#fff;border:1px solid #e6ddcd;box-shadow:0 2px 8px rgba(60,50,30,.12);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:19px;line-height:1;color:#6b6558;padding:0;z-index:5;transition:box-shadow .16s ease,border-color .16s ease;}
-.productView[data-entity-id="114"] .sd-thumb-nav:hover{box-shadow:0 4px 12px rgba(60,50,30,.18);border-color:#c9b48f;}
-.productView[data-entity-id="114"] .sd-thumb-nav.prev{left:2px;}
-.productView[data-entity-id="114"] .sd-thumb-nav.next{right:2px;}
+.productView.sd-pdp .sd-thumb-wrap{position:relative;}
+.productView.sd-pdp .sd-thumb-nav{position:absolute;top:50%;transform:translateY(-50%);width:34px;height:34px;border-radius:50%;background:#fff;border:1px solid #e6ddcd;box-shadow:0 2px 8px rgba(60,50,30,.12);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:19px;line-height:1;color:#6b6558;padding:0;z-index:5;transition:box-shadow .16s ease,border-color .16s ease;}
+.productView.sd-pdp .sd-thumb-nav:hover{box-shadow:0 4px 12px rgba(60,50,30,.18);border-color:#c9b48f;}
+.productView.sd-pdp .sd-thumb-nav.prev{left:2px;}
+.productView.sd-pdp .sd-thumb-nav.next{right:2px;}
 /* toddler mobile: keep the full-bleed section inside the viewport (the negative
    margins overflow on small screens), stack cleanly, single-column trust props */
 @media (max-width:800px){
-  .productView[data-entity-id="114"]{margin-left:0!important;margin-right:0!important;width:auto!important;padding:20px 16px!important;}
-  .productView[data-entity-id="114"] .productView-image{padding:16px!important;}
-  .productView[data-entity-id="114"] .sd-pricing{padding:20px!important;}
-  .productView[data-entity-id="114"] .sd-title-row{flex-wrap:wrap!important;}
-  .productView[data-entity-id="114"] .sd-trust{grid-template-columns:1fr!important;}
-  .productView[data-entity-id="114"] .productView-thumbnails{padding:0 42px!important;}
-  .productView[data-entity-id="114"] .productView-thumbnail-link{width:72px!important;height:88px!important;}
+  .productView.sd-pdp{margin-left:0!important;margin-right:0!important;width:auto!important;padding:20px 16px!important;}
+  .productView.sd-pdp .productView-image{padding:16px!important;}
+  .productView.sd-pdp .sd-pricing{padding:20px!important;}
+  .productView.sd-pdp .sd-title-row{flex-wrap:wrap!important;}
+  .productView.sd-pdp .sd-trust{grid-template-columns:1fr!important;}
+  .productView.sd-pdp .productView-thumbnails{padding:0 42px!important;}
+  .productView.sd-pdp .productView-thumbnail-link{width:72px!important;height:88px!important;}
 }
 html,body{overflow-x:hidden;}
 /* mobile product layout (all product pages): the mirrored theme leaves the two

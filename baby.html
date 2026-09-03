@@ -67,7 +67,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         
         <script nonce="" async src="assets/theme/dist/theme-bundle.font.js"></script>
 
-        <link data-stencil-stylesheet href="assets/css/theme.css?v=g4" rel="stylesheet">
+        <link data-stencil-stylesheet href="assets/css/theme.css?v=g5" rel="stylesheet">
 
         <!-- Start Tracking Code for analytics_facebook -->
 
@@ -774,7 +774,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div>
         
 
-<div class="productView"
+<div class="productView sd-pdp"
     data-event-type="product"
     data-entity-id="115"
     data-name="Baby Subscription (0-18 mo)"
@@ -3208,6 +3208,30 @@ document.addEventListener("DOMContentLoaded", function () {
 })();
 </script>
 <!-- SD-HEADER:END -->
+<!-- SD-THUMBNAV:START -->
+<script>
+(function(){
+  function init(){
+    var pv=document.querySelector('.productView.sd-pdp'); if(!pv) return false;
+    var ul=pv.querySelector('.productView-thumbnails'); var list=ul&&ul.querySelector('.slick-list');
+    if(!ul||!list) return false;
+    if(ul.parentNode && ul.parentNode.classList.contains('sd-thumb-wrap')) return true;
+    var host=document.createElement('div'); host.className='sd-thumb-wrap';
+    ul.parentNode.insertBefore(host, ul); host.appendChild(ul);
+    function mk(cls,g){var b=document.createElement('button');b.type='button';b.className='sd-thumb-nav '+cls;b.setAttribute('aria-label',cls==='prev'?'Previous images':'Next images');b.textContent=g;return b;}
+    var prev=mk('prev','\u2039'), next=mk('next','\u203A'); host.appendChild(prev); host.appendChild(next);
+    function step(){ return Math.round(list.clientWidth*0.72); }
+    function upd(){ prev.style.opacity=list.scrollLeft<=2?'.35':'1'; next.style.opacity=(list.scrollLeft>=list.scrollWidth-list.clientWidth-2)?'.35':'1'; }
+    prev.addEventListener('click',function(){list.scrollBy({left:-step(),behavior:'smooth'});});
+    next.addEventListener('click',function(){list.scrollBy({left:step(),behavior:'smooth'});});
+    list.addEventListener('scroll',upd); upd();
+    return true;
+  }
+  var tries=0, t=setInterval(function(){ if(init()||++tries>20) clearInterval(t); }, 250);
+  window.addEventListener('load', init);
+})();
+</script>
+<!-- SD-THUMBNAV:END -->
 <!-- SD-STICKY:START -->
 <div class="sd-stickybar" role="region" aria-label="Add to cart">
   <div class="sd-stickybar__info"><span class="sd-stickybar__name"></span><span class="sd-stickybar__price" data-sd-sticky-price></span></div>
