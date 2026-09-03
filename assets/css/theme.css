@@ -11,10 +11,10 @@ html{font-size:87.5%!important;}
    display fluid via clamp). Companion line-heights + weights pair with the sizes
    so each token is a full type style, not just a size. 1rem = 14px. */
 :root{
-  --fs-caption:0.786rem;   /* 11 */
-  --fs-meta:0.857rem;      /* 12 */
-  --fs-body:1.071rem;      /* 15 — base */
-  --fs-subhead:1.357rem;   /* 19 */
+  --fs-caption:0.857rem;   /* 12 */
+  --fs-meta:0.929rem;      /* 13 */
+  --fs-body:1.143rem;      /* 16 — base */
+  --fs-subhead:1.429rem;   /* 20 */
   --fs-title:clamp(1.571rem, 1.35rem + 1vw, 1.714rem);      /* 22 → 24 */
   --fs-display:clamp(1.857rem, 1.45rem + 1.8vw, 2.143rem);  /* 26 → 30 */
   --lh-tight:1.12; --lh-snug:1.3; --lh-body:1.55;
@@ -28,6 +28,14 @@ html{font-size:87.5%!important;}
 .enhancement-card__title{font-size:var(--fs-title)!important}
 .enhancement-card__description,.enhancement-card__link{font-size:var(--fs-body)!important}
 .enhancement-card__age{font-size:var(--fs-meta)!important}
+/* enhancement price was oversized (30px) — bring it under the card title */
+.enhancement-card__price strong{font-size:var(--fs-subhead)!important}
+.enhancement-card__price span{font-size:var(--fs-meta)!important}
+/* trust value props: a touch larger + still fit two-up */
+.sd-pricing .sd-trust{font-size:var(--fs-meta)!important}
+/* "Teacher/Child Kit Includes" -> small uppercase label (colon stripped in HTML) */
+.sd-includes{margin:18px 0 8px!important}
+.sd-includes span{font-size:var(--fs-caption)!important;text-transform:uppercase!important;letter-spacing:.07em!important;color:#6b6558!important}
 body{font-weight:500}
 [style*="font-weight: 400"]{font-weight:500!important}
 .product-header-description,.product-header-description p,.product-header-description li,.product-header-description span{font-size:var(--fs-body)!important;line-height:1.6!important}
