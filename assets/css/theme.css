@@ -18,6 +18,7 @@ html{font-size:87.5%!important;}
   --fs-title:clamp(1.571rem, 1.35rem + 1vw, 1.714rem);      /* 22 → 24 */
   --fs-display:clamp(1.857rem, 1.45rem + 1.8vw, 2.143rem);  /* 26 → 30 */
   --fs-label:0.786rem;     /* 11 — uppercase eyebrow / field labels */
+  --fs-section:clamp(1.9rem, 1.35rem + 2vw, 2.571rem);  /* 27 → 36 — homepage/PDP section headers */
   --lh-tight:1.12; --lh-snug:1.3; --lh-body:1.55;
   --fw-body:500; --fw-strong:700; --fw-display:800;
 }
@@ -32,8 +33,9 @@ html{font-size:87.5%!important;}
 .enhancement-card__title{font-size:var(--fs-title)!important}
 .enhancement-card__description,.enhancement-card__link{font-size:var(--fs-body)!important}
 .enhancement-card__age{font-size:var(--fs-meta)!important}
-/* oversized section headlines (Related Products 50px, All Curriculum Kits 46px) -> display */
-.enhancement-picker__title,.kit-picker__title{font-size:var(--fs-display)!important;line-height:var(--lh-tight)!important}
+/* unify all homepage + PDP section headers to one size (~36, matching the
+   "What's inside" .curriculum-title reference); was 50 / 46 / 46 / 36 */
+.enhancement-picker__title,.kit-picker__title,.testimonial-band__title,.curriculum-title{font-size:var(--fs-section)!important;line-height:var(--lh-tight)!important}
 /* enhancement price was oversized (30px) — bring it under the card title */
 .enhancement-card__price strong{font-size:var(--fs-subhead)!important}
 .enhancement-card__price span{font-size:var(--fs-meta)!important}
