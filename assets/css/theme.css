@@ -162,6 +162,13 @@ html,body{overflow-x:hidden;}
 .kit-card__image{width:184px!important;height:230px!important;max-height:none!important;object-fit:cover!important;border-radius:14px!important;box-shadow:0 2px 10px rgba(60,50,30,.10)!important;}
 /* Bestseller enhancement badge (distinct colour from the teal Teacher Favorite) */
 .enhancement-card__badge--bestseller{background:#FB5541!important;}
+/* PDP content sections were too loose vertically — halve the section rhythm */
+.curriculum-section{padding-top:40px!important;padding-bottom:40px!important;}
+.curriculum-video{padding-top:40px!important;padding-bottom:30px!important;}
+.monthly-themes-section{padding-top:24px!important;padding-bottom:24px!important;}
+.monthly-themes-band{padding-top:28px!important;padding-bottom:8px!important;}
+.testimonial-band{padding-top:41px!important;padding-bottom:47px!important;}
+.enhancement-picker{padding-top:38px!important;padding-bottom:41px!important;}
 /* mobile: keep the shipping & delivery note left-aligned */
 @media (max-width:800px){
   .sd-shipping-note,.sd-shipping-note p{text-align:left!important;}
