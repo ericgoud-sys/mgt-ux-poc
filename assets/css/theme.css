@@ -166,6 +166,10 @@ html,body{overflow-x:hidden;}
 .kit-card__image{width:184px!important;height:230px!important;max-height:none!important;object-fit:cover!important;border-radius:14px!important;box-shadow:0 2px 10px rgba(60,50,30,.10)!important;}
 /* Bestseller enhancement badge (distinct colour from the teal Teacher Favorite) */
 .enhancement-card__badge--bestseller{background:#FB5541!important;}
+/* "What's inside each kit" grid: tighter + calmer (one-line copy, unified tiles) */
+.curriculum-grid{gap:34px 40px!important;}
+.curriculum-item img{margin-bottom:14px!important;border:1px solid #ece6da!important;}
+.curriculum-item p{margin:0!important;}
 /* PDP content sections were too loose vertically — halve the section rhythm */
 .curriculum-section{padding-top:40px!important;padding-bottom:40px!important;}
 .curriculum-video{padding-top:40px!important;padding-bottom:30px!important;}
