@@ -188,4 +188,16 @@ html,body{overflow-x:hidden;}
 .preschool-band__text{font-size:var(--fs-body)!important;line-height:1.55!important;}
 .preschool-band__image{-ms-flex:0 0 40%!important;flex:0 0 40%!important;}
 .preschool-band__image img{max-width:390px!important;margin-bottom:0!important;}
+/* gallery video slide: poster fills the portrait tile, centered play badge */
+.sd-video-thumb .productView-thumbnail-link{position:relative!important;}
+.sd-video-thumb .productView-thumbnail-link img{object-fit:cover!important;}
+.sd-video-badge{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:30px;height:30px;border-radius:50%;background:rgba(0,0,0,.58);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;padding-left:2px;pointer-events:none;box-shadow:0 1px 4px rgba(0,0,0,.35);}
+/* video lightbox */
+.sd-vlightbox{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;background:rgba(20,16,30,.82);padding:24px;}
+.sd-vlightbox.is-open{display:flex;}
+.sd-vlightbox__frame{width:min(900px,92vw);}
+.sd-vlightbox__ratio{position:relative;width:100%;height:0;padding-bottom:56.25%;border-radius:12px;overflow:hidden;background:#000;box-shadow:0 20px 60px rgba(0,0,0,.5);}
+.sd-vlightbox__ratio iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0;}
+.sd-vlightbox__close{position:absolute;top:18px;right:24px;width:42px;height:42px;border-radius:50%;border:0;background:rgba(255,255,255,.14);color:#fff;font-size:26px;line-height:1;cursor:pointer;}
+.sd-vlightbox__close:hover{background:rgba(255,255,255,.26);}
 /* SD-TYPO:END */
