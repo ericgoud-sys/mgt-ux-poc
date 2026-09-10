@@ -67,7 +67,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         
         <script nonce="" async src="assets/theme/dist/theme-bundle.font.js"></script>
 
-        <link data-stencil-stylesheet href="assets/css/theme.css?v=g22" rel="stylesheet">
+        <link data-stencil-stylesheet href="assets/css/theme.css?v=g23" rel="stylesheet">
 
         <!-- Start Tracking Code for analytics_facebook -->
 
@@ -3186,32 +3186,27 @@ document.addEventListener("DOMContentLoaded", function () {
   document.body.insertAdjacentHTML('afterbegin', '<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K2TQZ48M" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>');
 </script>
     <script>window.__CF$cv$params={r:'a325a0491b7eeb9f',t:'MTc4Nzk0NDMzMQ==',u:'01a049c96b6c7cb29749e37c4272b734',ut:'riIXVNjHV65LSKrzNnn4h9zLSrv3lkpiVcJ32BwoVBE-1787944332-1.2.1.1-_gyMEM.G8Om98vu3.bC8rrde5TQGCDXfNr5eDb49okT1BjRuKXmsTCShP4onyfr7S590dKArUSYpLy23rQs4f0XKB.nmMiSO35hx8N_LoGc',i:60};(function(){if(!document.body)return;var s=document.createElement('script');s.src='/cdn-cgi/challenge-platform/scripts/precursor/main.js';document.head.appendChild(s);})();</script><!-- SD-VIDEO:START -->
+<div class="sd-vlightbox" aria-hidden="true" role="dialog" aria-modal="true">
+  <div class="sd-vlightbox__panel">
+    <button type="button" class="sd-vlightbox__close" aria-label="Close video">&times;</button>
+    <div class="sd-vlightbox__ratio"></div>
+  </div>
+</div>
 <script>
 (function(){
-  function mainContainer(){ var pv=document.querySelector('.productView.sd-pdp'); return pv&&pv.querySelector('.productView-image .productView-img-container'); }
-  function setActive(link){
-    var pv=document.querySelector('.productView.sd-pdp'); if(!pv) return;
-    pv.querySelectorAll('.sd-video-thumb .productView-thumbnail-link').forEach(function(a){ a.classList.toggle('is-active', a===link); });
+  var box=document.querySelector('.sd-vlightbox'); if(!box) return;
+  var ratio=box.querySelector('.sd-vlightbox__ratio');
+  function open(id){
+    ratio.innerHTML='<iframe src="https://www.youtube.com/embed/'+id+'?autoplay=1&mute=1&rel=0&playsinline=1&modestbranding=1" frameborder="0" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>';
+    box.classList.add('is-open'); box.setAttribute('aria-hidden','false');
   }
-  function showVideo(id, link){
-    var cont=mainContainer(); if(!cont) return;
-    if(!cont.querySelector('.sd-gallery-video')){
-      var w=document.createElement('div'); w.className='sd-gallery-video';
-      w.innerHTML='<iframe src="https://www.youtube.com/embed/'+id+'?autoplay=1&mute=1&rel=0&playsinline=1&modestbranding=1" frameborder="0" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>';
-      cont.appendChild(w);
-    }
-    cont.classList.add('sd-video-on'); setActive(link);
-  }
-  function hideVideo(){
-    var cont=mainContainer(); if(!cont) return;
-    var w=cont.querySelector('.sd-gallery-video'); if(w) w.parentNode.removeChild(w); // removing the iframe stops playback
-    cont.classList.remove('sd-video-on'); setActive(null);
-  }
+  function close(){ if(!box.classList.contains('is-open')) return; box.classList.remove('is-open'); box.setAttribute('aria-hidden','true'); setTimeout(function(){ ratio.innerHTML=''; },220); }
   document.addEventListener('click', function(e){
-    var v=e.target.closest('[data-sd-video]');
-    if(v){ e.preventDefault(); showVideo(v.getAttribute('data-sd-video'), v.closest('.productView-thumbnail-link')); return; }
-    if(e.target.closest('[data-image-gallery-item]')) hideVideo();
+    var t=e.target.closest('[data-sd-video]');
+    if(t){ e.preventDefault(); open(t.getAttribute('data-sd-video')); return; }
+    if(e.target===box || e.target.closest('.sd-vlightbox__close')) close();
   });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape'||e.keyCode===27) close(); });
 })();
 </script>
 <!-- SD-VIDEO:END -->
