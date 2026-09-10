@@ -67,7 +67,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         
         <script nonce="" async src="assets/theme/dist/theme-bundle.font.js"></script>
 
-        <link data-stencil-stylesheet href="assets/css/theme.css?v=g23" rel="stylesheet">
+        <link data-stencil-stylesheet href="assets/css/theme.css?v=g24" rel="stylesheet">
 
         <!-- Start Tracking Code for analytics_facebook -->
 
@@ -3346,19 +3346,29 @@ document.addEventListener("DOMContentLoaded", function () {
 </div>
 <script>
 (function(){
-  var box=document.querySelector('.sd-vlightbox'); if(!box) return;
-  var ratio=box.querySelector('.sd-vlightbox__ratio');
-  function open(id){
-    ratio.innerHTML='<iframe src="https://www.youtube.com/embed/'+id+'?autoplay=1&mute=1&rel=0&playsinline=1&modestbranding=1" frameborder="0" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>';
-    box.classList.add('is-open'); box.setAttribute('aria-hidden','false');
+  var box=document.querySelector('.sd-vlightbox'), ratio=box&&box.querySelector('.sd-vlightbox__ratio');
+  function mainContainer(){ var pv=document.querySelector('.productView.sd-pdp'); return pv&&pv.querySelector('.productView-image .productView-img-container'); }
+  function setActive(link){ var pv=document.querySelector('.productView.sd-pdp'); if(!pv) return; pv.querySelectorAll('.sd-video-thumb .productView-thumbnail-link').forEach(function(a){ a.classList.toggle('is-active', a===link); }); }
+  function embed(id){ return '<iframe src="https://www.youtube.com/embed/'+id+'?autoplay=1&mute=1&rel=0&playsinline=1&modestbranding=1" frameborder="0" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>'; }
+  // inline gallery player (muted)
+  function showVideo(id, link){
+    var cont=mainContainer(); if(!cont) return;
+    var w=cont.querySelector('.sd-gallery-video');
+    if(!w){ w=document.createElement('div'); w.className='sd-gallery-video'; cont.appendChild(w); }
+    w.innerHTML=embed(id)+'<button type="button" class="sd-gallery-video__expand" data-sd-expand="'+id+'" aria-label="Expand video" title="Expand">⤢</button>';
+    cont.classList.add('sd-video-on'); setActive(link);
   }
-  function close(){ if(!box.classList.contains('is-open')) return; box.classList.remove('is-open'); box.setAttribute('aria-hidden','true'); setTimeout(function(){ ratio.innerHTML=''; },220); }
+  function hideVideo(){ var cont=mainContainer(); if(!cont) return; var w=cont.querySelector('.sd-gallery-video'); if(w) w.parentNode.removeChild(w); cont.classList.remove('sd-video-on'); setActive(null); }
+  // expanded lightbox (opened from the inline expand control)
+  function openBox(id){ if(!box) return; ratio.innerHTML=embed(id); box.classList.add('is-open'); box.setAttribute('aria-hidden','false'); }
+  function closeBox(){ if(!box||!box.classList.contains('is-open')) return; box.classList.remove('is-open'); box.setAttribute('aria-hidden','true'); setTimeout(function(){ ratio.innerHTML=''; },220); }
   document.addEventListener('click', function(e){
-    var t=e.target.closest('[data-sd-video]');
-    if(t){ e.preventDefault(); open(t.getAttribute('data-sd-video')); return; }
-    if(e.target===box || e.target.closest('.sd-vlightbox__close')) close();
+    var exp=e.target.closest('[data-sd-expand]'); if(exp){ e.preventDefault(); openBox(exp.getAttribute('data-sd-expand')); return; }
+    var v=e.target.closest('[data-sd-video]'); if(v){ e.preventDefault(); showVideo(v.getAttribute('data-sd-video'), v.closest('.productView-thumbnail-link')); return; }
+    if(e.target.closest('[data-image-gallery-item]')) hideVideo();
+    if(e.target===box || e.target.closest('.sd-vlightbox__close')) closeBox();
   });
-  document.addEventListener('keydown', function(e){ if(e.key==='Escape'||e.keyCode===27) close(); });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape'||e.keyCode===27) closeBox(); });
 })();
 </script>
 <!-- SD-VIDEO:END -->
